@@ -1,11 +1,23 @@
-import { app, BrowserWindow, ipcMain } from 'electron'
+import { app, BrowserWindow, ipcMain, nativeImage } from 'electron'
 import { join } from 'node:path'
 import { closeDb, getDb } from './database'
 import { calculateNomina } from '../renderer/src/utils/nominaCalc'
 
 let mainWindow: BrowserWindow | null = null
 
+const createAppIcon = () => {
+  const svg = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+    <rect width="256" height="256" rx="56" fill="#080810"/>
+    <rect x="20" y="20" width="216" height="216" rx="48" fill="#0f0f1a" stroke="rgba(255,255,255,0.08)" stroke-width="4"/>
+    <path d="M70 162l34-68 30 40 26-30 26 58H70z" fill="#7c3aed" fill-opacity="0.85"/>
+    <path d="M72 150l28-56 36 30 22-28 24 54H72z" fill="#b5ff4d"/>
+  </svg>`
+  return nativeImage.createFromDataURL(`data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}`)
+}
+
 const createWindow = (): void => {
+  const icon = createAppIcon()
   mainWindow = new BrowserWindow({
     width: 1280,
     height: 800,
@@ -14,6 +26,7 @@ const createWindow = (): void => {
     frame: false,
     titleBarStyle: 'hidden',
     backgroundColor: '#070b14',
+    icon,
     webPreferences: {
       preload: join(__dirname, '../preload/index.mjs'),
       contextIsolation: true,

@@ -98,3 +98,6 @@ Genera instalador en `release\` (según `electron-builder`).
 
 - **`EPERM` al instalar**  
   Cierra VS Code/Electron, pausa OneDrive temporalmente y reintenta.
+
+
+
