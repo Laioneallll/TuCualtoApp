@@ -16,10 +16,10 @@ const pages = {
 
 type PageKey = keyof typeof pages
 
-const pageMeta: Record<PageKey, { title: string }> = {
-  dashboard: { title: 'Dashboard' },
-  transactions: { title: 'Transacciones' },
-  nomina: { title: 'Calculadora de Nómina' }
+const pageMeta: Record<PageKey, { title: string; subtitle: string }> = {
+  dashboard: { title: 'Dashboard', subtitle: 'Resumen financiero de tu flow' },
+  transactions: { title: 'Transacciones', subtitle: 'Control total de movimientos' },
+  nomina: { title: 'Calculadora de Nómina', subtitle: 'Calcula según leyes de RD' }
 }
 
 function App(): JSX.Element {
@@ -28,24 +28,24 @@ function App(): JSX.Element {
   const CurrentPage = useMemo(() => pages[page], [page])
 
   return (
-    <div className="h-full w-full overflow-hidden bg-transparent text-slate-100">
+    <div className="h-full w-full overflow-hidden bg-transparent text-[var(--text-primary)]">
       <TitleBar />
-      <div className="flex h-[calc(100%-44px)]">
+      <div className="flex h-[calc(100%-40px)]">
         <Sidebar page={page} onNavigate={setPage} />
         <main className="relative flex-1 overflow-hidden p-6">
-          <div className="mb-6">
-            <h1 className="font-['Plus_Jakarta_Sans'] text-2xl font-bold tracking-tight">{pageMeta[page].title}</h1>
-            <p className="text-sm text-slate-400">Tu cualto. Tu flow. Siempre en control.</p>
+          <div className="mb-5">
+            <h1 className="text-2xl font-semibold">{pageMeta[page].title}</h1>
+            <p className="text-sm text-[var(--text-secondary)]">{pageMeta[page].subtitle}</p>
           </div>
 
           <AnimatePresence mode="wait">
             <motion.div
               key={page}
-              initial={{ x: 30, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -30, opacity: 0 }}
-              transition={{ duration: 0.2, ease: 'easeOut' }}
-              className="h-[calc(100%-72px)] overflow-y-auto pr-1"
+              initial={{ opacity: 0, x: 16 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -8 }}
+              transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+              className="h-[calc(100%-62px)] overflow-y-auto pr-1"
             >
               <CurrentPage finance={finance} />
             </motion.div>
@@ -57,4 +57,3 @@ function App(): JSX.Element {
 }
 
 export default App
-

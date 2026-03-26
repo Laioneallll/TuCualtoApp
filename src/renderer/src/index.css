@@ -4,12 +4,24 @@
 
 :root {
   color-scheme: dark;
-  --bg: #070b14;
-  --surface: #101826;
-  --surface-2: #151f31;
-  --line: #233149;
-  --text: #e5ecff;
-  --muted: #8ea2c7;
+  --bg-base: #080810;
+  --bg-surface: #0f0f1a;
+  --bg-elevated: #161625;
+  --accent: #b5ff4d;
+  --accent-dim: #8fd622;
+  --accent-glow: rgba(181, 255, 77, 0.15);
+  --violet: #7c3aed;
+  --violet-dim: #5b21b6;
+  --violet-glow: rgba(124, 58, 237, 0.15);
+  --income: #b5ff4d;
+  --expense: #ff4560;
+  --expense-glow: rgba(255, 69, 96, 0.12);
+  --warning: #ffb830;
+  --border: rgba(255, 255, 255, 0.06);
+  --border-hover: rgba(255, 255, 255, 0.12);
+  --text-primary: #f0f0ff;
+  --text-secondary: #8888aa;
+  --text-muted: #44445a;
 }
 
 * {
@@ -26,9 +38,10 @@ body,
 }
 
 body {
-  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  background: radial-gradient(circle at top, #111a2d 0%, var(--bg) 55%);
-  color: var(--text);
+  font-family: 'Space Grotesk', sans-serif;
+  background: radial-gradient(circle at 20% -10%, #18172b 0%, var(--bg-base) 52%);
+  color: var(--text-primary);
+  overflow: hidden;
 }
 
 button,
@@ -37,13 +50,30 @@ select {
   font: inherit;
 }
 
+input:focus,
+select:focus,
+button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(181, 255, 77, 0.35);
+}
+
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 3px;
+  height: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2a3a57;
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 999px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.mono,
+.amount {
+  font-family: 'JetBrains Mono', monospace;
 }
 
 .app-region-drag {
@@ -54,7 +84,35 @@ select {
   -webkit-app-region: no-drag;
 }
 
-.card {
-  @apply rounded-2xl border border-slate-700/70 bg-slate-900/60 backdrop-blur;
+.surface-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
 }
 
+.card-hover {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-1px);
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(181, 255, 77, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(181, 255, 77, 0);
+  }
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse-glow 2s infinite;
+}
