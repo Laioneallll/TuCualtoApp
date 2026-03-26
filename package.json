@@ -38,6 +38,7 @@
   "build": {
     "appId": "com.tucualto.app",
     "productName": "Tu Cualto App",
+    "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
     "directories": {
       "output": "release"
     },
@@ -47,8 +48,17 @@
       "package.json"
     ],
     "win": {
+      "icon": "resources/icon.ico",
       "target": [
         "nsis"
+      ]
+    },
+    "linux": {
+      "icon": "resources/icons",
+      "category": "Office;Finance;",
+      "target": [
+        "AppImage",
+        "snap"
       ]
     },
     "nsis": {
