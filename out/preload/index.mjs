@@ -15,6 +15,16 @@ const api = {
   nomina: {
     calculate: (salary) => ipcRenderer.invoke("nomina:calculate", salary)
   },
+  employees: {
+    list: () => ipcRenderer.invoke("employees:list"),
+    create: (payload) => ipcRenderer.invoke("employees:create", payload),
+    update: (id, payload) => ipcRenderer.invoke("employees:update", id, payload),
+    remove: (id) => ipcRenderer.invoke("employees:delete", id)
+  },
+  payroll: {
+    send: (payload) => ipcRenderer.invoke("payroll:send", payload),
+    list: () => ipcRenderer.invoke("payroll:list")
+  },
   window: {
     minimize: () => ipcRenderer.invoke("window:minimize"),
     toggleMaximize: () => ipcRenderer.invoke("window:toggle-maximize"),

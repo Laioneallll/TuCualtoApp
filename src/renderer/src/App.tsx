@@ -7,6 +7,7 @@ import { Sidebar } from './components/Sidebar'
 import { TitleBar } from './components/TitleBar'
 import { Transactions } from './components/Transactions'
 import { useFinance } from './hooks/useFinance'
+import { usePayroll } from './hooks/usePayroll'
 
 const pages = {
   dashboard: Dashboard,
@@ -19,12 +20,13 @@ type PageKey = keyof typeof pages
 const pageMeta: Record<PageKey, { title: string; subtitle: string }> = {
   dashboard: { title: 'Dashboard', subtitle: 'Resumen financiero de tu flow' },
   transactions: { title: 'Transacciones', subtitle: 'Control total de movimientos' },
-  nomina: { title: 'Calculadora de Nómina', subtitle: 'Calcula según leyes de RD' }
+  nomina: { title: 'Sistema de Nómina', subtitle: 'Gestión de empleados y pago de nóminas' }
 }
 
 function App(): JSX.Element {
   const [page, setPage] = useState<PageKey>('dashboard')
   const finance = useFinance()
+  const payroll = usePayroll()
   const CurrentPage = useMemo(() => pages[page], [page])
 
   return (
@@ -47,7 +49,7 @@ function App(): JSX.Element {
               transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
               className="h-[calc(100%-62px)] overflow-y-auto pr-1"
             >
-              <CurrentPage finance={finance} />
+              <CurrentPage finance={finance} payroll={payroll} />
             </motion.div>
           </AnimatePresence>
         </main>
@@ -57,3 +59,4 @@ function App(): JSX.Element {
 }
 
 export default App
+

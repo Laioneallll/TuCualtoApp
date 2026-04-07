@@ -24,3 +24,6 @@ hs_err_pid*
 replay_pid*
 .env
 node_modules
+Diagrama.md
+out/
+dist/

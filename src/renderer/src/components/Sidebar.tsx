@@ -3,7 +3,7 @@ import { ArrowLeftRight, Calculator, LayoutDashboard, User, Zap } from 'lucide-r
 const items = [
   { key: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { key: 'transactions', label: 'Transacciones', icon: ArrowLeftRight },
-  { key: 'nomina', label: 'Calculadora Nómina', icon: Calculator }
+  { key: 'nomina', label: 'Nómina', icon: Calculator }
 ] as const
 
 interface SidebarProps {

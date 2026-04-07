@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import type { UseFinance } from '../hooks/useFinance'
-import type { Transaction, TransactionPayload } from '../types'
+import type { Transaction, TransactionPayload, TransactionType } from '../types'
 
 interface AddTransactionModalProps {
   open: boolean
@@ -11,31 +11,67 @@ interface AddTransactionModalProps {
   initial?: Transaction | null
 }
 
-const getInitialPayload = (finance: UseFinance, initial?: Transaction | null): TransactionPayload => ({
-  title: initial?.title ?? '',
-  amount: initial?.amount ?? 0,
-  type: initial?.type ?? 'expense',
-  categoryId: initial?.categoryId ?? finance.categories[0]?.id ?? 1,
-  date: initial?.date ?? new Date().toISOString().slice(0, 10),
-  note: initial?.note ?? ''
-})
+const getInitialPayload = (finance: UseFinance, initial?: Transaction | null): TransactionPayload => {
+  const type: TransactionType = initial?.type ?? 'expense'
+  const categoryId =
+    initial?.categoryId ??
+    finance.categories.find((c) => c.type === type)?.id ??
+    finance.categories[0]?.id ??
+    1
+  return {
+    title: initial?.title ?? '',
+    amount: initial?.amount ?? 0,
+    type,
+    categoryId,
+    date: initial?.date ?? new Date().toISOString().slice(0, 10),
+    note: initial?.note ?? ''
+  }
+}
 
 export const AddTransactionModal = ({ open, onClose, onSave, finance, initial }: AddTransactionModalProps): JSX.Element | null => {
   const [payload, setPayload] = useState<TransactionPayload>(() => getInitialPayload(finance, initial))
+  const [error, setError] = useState<string | null>(null)
+
+  // Keep a ref to the latest finance so the effect always reads current categories
+  // without re-running (and resetting the form) on every finance reference change.
+  const financeRef = useRef(finance)
+  financeRef.current = finance
 
   useEffect(() => {
-    if (open) setPayload(getInitialPayload(finance, initial))
-  }, [open, initial, finance])
+    if (open) {
+      setPayload(getInitialPayload(financeRef.current, initial))
+      setError(null)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, initial])
 
   const categoryOptions = useMemo(() => finance.categories.filter((c) => c.type === payload.type), [finance.categories, payload.type])
 
   if (!open) return null
 
+  const handleTypeChange = (type: TransactionType) => {
+    const firstOfType = finance.categories.find((c) => c.type === type)
+    setPayload((p) => ({ ...p, type, categoryId: firstOfType?.id ?? p.categoryId }))
+  }
+
   const submit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!payload.title.trim() || payload.amount <= 0) return
-    await onSave(payload)
-    onClose()
+    if (!payload.title.trim()) {
+      setError('Por favor ingresa una descripción.')
+      return
+    }
+    if (payload.amount <= 0) {
+      setError('El monto debe ser mayor a 0.')
+      return
+    }
+    setError(null)
+    try {
+      await onSave(payload)
+      onClose()
+    } catch (err) {
+      console.error('Error al guardar la transacción:', err)
+      setError('Ocurrió un error al guardar. Intenta de nuevo.')
+    }
   }
 
   return (
@@ -54,14 +90,14 @@ export const AddTransactionModal = ({ open, onClose, onSave, finance, initial }:
         <div className="grid grid-cols-2 gap-2">
           <button
             type="button"
-            onClick={() => setPayload((p) => ({ ...p, type: 'income' }))}
+            onClick={() => handleTypeChange('income')}
             className={`rounded-[10px] border px-3 py-2 text-sm ${payload.type === 'income' ? 'border-[var(--accent)] bg-[rgba(181,255,77,0.1)] text-[var(--accent)]' : 'border-transparent bg-[var(--bg-surface)] text-[var(--text-secondary)]'}`}
           >
             Ingreso
           </button>
           <button
             type="button"
-            onClick={() => setPayload((p) => ({ ...p, type: 'expense' }))}
+            onClick={() => handleTypeChange('expense')}
             className={`rounded-[10px] border px-3 py-2 text-sm ${payload.type === 'expense' ? 'border-[var(--expense)] bg-[rgba(255,69,96,0.1)] text-[var(--expense)]' : 'border-transparent bg-[var(--bg-surface)] text-[var(--text-secondary)]'}`}
           >
             Gasto
@@ -120,6 +156,10 @@ export const AddTransactionModal = ({ open, onClose, onSave, finance, initial }:
             <input value={payload.note} onChange={(e) => setPayload((p) => ({ ...p, note: e.target.value }))} className="w-full rounded-[10px] bg-[var(--bg-surface)] px-3 py-2" />
           </label>
         </div>
+
+        {error && (
+          <p className="rounded-[10px] bg-[rgba(255,69,96,0.1)] px-3 py-2 text-xs text-[var(--expense)]">{error}</p>
+        )}
 
         <div className="flex justify-end gap-2">
           <button type="button" onClick={onClose} className="rounded-[10px] px-4 py-2 text-sm text-[var(--text-secondary)]">

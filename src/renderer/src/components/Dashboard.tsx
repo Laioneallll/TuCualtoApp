@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
+import { FileText } from 'lucide-react'
 import { Area, AreaChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis } from 'recharts'
+import type { UsePayroll } from '../hooks/usePayroll'
 import type { UseFinance } from '../hooks/useFinance'
 import { formatRD } from '../utils/nominaCalc'
 
@@ -15,7 +17,7 @@ const relativeDate = (iso: string): string => {
   return `hace ${diffDays}d`
 }
 
-export const Dashboard = ({ finance }: { finance: UseFinance }): JSX.Element => {
+export const Dashboard = ({ finance, payroll }: { finance: UseFinance; payroll: UsePayroll }): JSX.Element => {
   const { stats, transactions } = finance
   const savingRate = stats.totalIncome > 0 ? ((stats.totalIncome - stats.totalExpense) / stats.totalIncome) * 100 : 0
   const latestMonth = stats.monthly.at(-1)?.month ?? new Date().toISOString().slice(0, 7)
@@ -23,6 +25,7 @@ export const Dashboard = ({ finance }: { finance: UseFinance }): JSX.Element => 
   const expensesOnly = stats.categoryBreakdown.filter((c) => c.type === 'expense')
   const expenseTotal = expensesOnly.reduce((acc, item) => acc + item.total, 0)
   const pieColors = ['#ff4560', '#7c3aed', '#ffb830', '#b5ff4d', '#5b21b6', '#c084fc']
+  const recentPayrolls = payroll.payrollRecords.slice(0, 3)
 
   return (
     <section className="space-y-4">
@@ -132,6 +135,42 @@ export const Dashboard = ({ finance }: { finance: UseFinance }): JSX.Element => 
           </div>
         </div>
       </div>
+
+      {/* Payroll summary widget */}
+      <div className="surface-card card-hover p-4">
+        <div className="mb-3 flex items-center gap-2">
+          <FileText size={15} className="text-[var(--accent)]" />
+          <p className="text-sm text-[var(--text-secondary)]">Últimas nóminas enviadas</p>
+          <span className="ml-auto rounded-full bg-[var(--bg-elevated)] px-2 py-0.5 text-xs text-[var(--text-muted)]">
+            {payroll.employees.length} empleado{payroll.employees.length !== 1 ? 's' : ''}
+          </span>
+        </div>
+        {recentPayrolls.length === 0 ? (
+          <div className="grid h-20 place-items-center text-center text-[var(--text-secondary)]">
+            <p className="text-sm">No hay nóminas enviadas aún</p>
+          </div>
+        ) : (
+          <div className="space-y-2">
+            {recentPayrolls.map((record) => (
+              <div key={record.id} className="flex items-center justify-between rounded-[10px] border border-[var(--border)] px-3 py-2.5 transition hover:bg-white/5">
+                <div>
+                  <p className="text-sm text-[var(--text-primary)]">
+                    Nómina {new Date(`${record.period}-01T00:00:00`).toLocaleDateString('es-DO', { month: 'long', year: 'numeric' })}
+                  </p>
+                  <p className="text-xs text-[var(--text-muted)]">
+                    {record.employeeCount} empleado{record.employeeCount !== 1 ? 's' : ''} · {new Date(record.sentAt).toLocaleDateString('es-DO')}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="amount text-sm font-semibold text-[var(--income)]">{formatRD(record.totalNet)}</p>
+                  <p className="text-xs text-[var(--text-muted)]">neto</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </section>
   )
 }
+
