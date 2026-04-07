@@ -52,6 +52,28 @@ export const getDb = (): Database.Database => {
     BEGIN
       UPDATE transactions SET updatedAt = datetime('now') WHERE id = NEW.id;
     END;
+
+    CREATE TABLE IF NOT EXISTS employees (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      occupation TEXT NOT NULL,
+      salaryBase REAL NOT NULL DEFAULT 0 CHECK(salaryBase >= 0),
+      department TEXT NOT NULL DEFAULT '',
+      phone TEXT NOT NULL DEFAULT '',
+      email TEXT NOT NULL DEFAULT '',
+      createdAt TEXT NOT NULL DEFAULT (datetime('now'))
+    );
+
+    CREATE TABLE IF NOT EXISTS payroll_records (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      period TEXT NOT NULL,
+      employeeCount INTEGER NOT NULL,
+      totalGross REAL NOT NULL,
+      totalNet REAL NOT NULL,
+      totalDeductions REAL NOT NULL,
+      details TEXT NOT NULL DEFAULT '[]',
+      sentAt TEXT NOT NULL DEFAULT (datetime('now'))
+    );
   `)
 
   const count = db.prepare('SELECT COUNT(*) as total FROM categories').get() as { total: number }

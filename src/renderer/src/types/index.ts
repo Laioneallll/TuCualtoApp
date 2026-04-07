@@ -58,6 +58,59 @@ export interface NominaResult {
   netSalary: number
 }
 
+// ─── Employee & Payroll types ────────────────────────────────────────────────
+
+export interface Employee {
+  id: number
+  name: string
+  occupation: string
+  salaryBase: number
+  department: string
+  phone: string
+  email: string
+  createdAt: string
+}
+
+export interface EmployeePayload {
+  name: string
+  occupation: string
+  salaryBase: number
+  department?: string
+  phone?: string
+  email?: string
+}
+
+export interface PayrollEmployeeDetail {
+  employeeId: number
+  name: string
+  occupation: string
+  salaryBase: number
+  afp: number
+  sfs: number
+  isr: number
+  totalDeductions: number
+  netSalary: number
+}
+
+export interface PayrollRecord {
+  id: number
+  period: string
+  employeeCount: number
+  totalGross: number
+  totalNet: number
+  totalDeductions: number
+  sentAt: string
+}
+
+export interface SendPayrollPayload {
+  period: string
+  employeeCount: number
+  totalGross: number
+  totalNet: number
+  totalDeductions: number
+  details: PayrollEmployeeDetail[]
+}
+
 declare global {
   interface Window {
     api: {
@@ -75,6 +128,16 @@ declare global {
       }
       nomina: {
         calculate: (salary: number) => Promise<NominaResult>
+      }
+      employees: {
+        list: () => Promise<Employee[]>
+        create: (payload: EmployeePayload) => Promise<{ id: number }>
+        update: (id: number, payload: EmployeePayload) => Promise<{ updated: boolean }>
+        remove: (id: number) => Promise<{ deleted: boolean }>
+      }
+      payroll: {
+        send: (payload: SendPayrollPayload) => Promise<{ id: number }>
+        list: () => Promise<PayrollRecord[]>
       }
       window: {
         minimize: () => Promise<void>

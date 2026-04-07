@@ -50,6 +50,28 @@ const getDb = () => {
     BEGIN
       UPDATE transactions SET updatedAt = datetime('now') WHERE id = NEW.id;
     END;
+
+    CREATE TABLE IF NOT EXISTS employees (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      occupation TEXT NOT NULL,
+      salaryBase REAL NOT NULL DEFAULT 0 CHECK(salaryBase >= 0),
+      department TEXT NOT NULL DEFAULT '',
+      phone TEXT NOT NULL DEFAULT '',
+      email TEXT NOT NULL DEFAULT '',
+      createdAt TEXT NOT NULL DEFAULT (datetime('now'))
+    );
+
+    CREATE TABLE IF NOT EXISTS payroll_records (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      period TEXT NOT NULL,
+      employeeCount INTEGER NOT NULL,
+      totalGross REAL NOT NULL,
+      totalNet REAL NOT NULL,
+      totalDeductions REAL NOT NULL,
+      details TEXT NOT NULL DEFAULT '[]',
+      sentAt TEXT NOT NULL DEFAULT (datetime('now'))
+    );
   `);
   const count = db.prepare("SELECT COUNT(*) as total FROM categories").get();
   if (!count.total) {
@@ -196,6 +218,63 @@ const registerIpc = () => {
     };
   });
   ipcMain.handle("nomina:calculate", (_event, salary) => calculateNomina(salary));
+  ipcMain.handle(
+    "employees:list",
+    () => db2.prepare("SELECT * FROM employees ORDER BY name ASC").all()
+  );
+  ipcMain.handle("employees:create", (_event, payload) => {
+    const stmt = db2.prepare(
+      "INSERT INTO employees (name, occupation, salaryBase, department, phone, email) VALUES (@name, @occupation, @salaryBase, @department, @phone, @email)"
+    );
+    const result = stmt.run({
+      name: payload.name,
+      occupation: payload.occupation,
+      salaryBase: payload.salaryBase,
+      department: payload.department ?? "",
+      phone: payload.phone ?? "",
+      email: payload.email ?? ""
+    });
+    return { id: Number(result.lastInsertRowid) };
+  });
+  ipcMain.handle("employees:update", (_event, id, payload) => {
+    const stmt = db2.prepare(
+      "UPDATE employees SET name=@name, occupation=@occupation, salaryBase=@salaryBase, department=@department, phone=@phone, email=@email WHERE id=@id"
+    );
+    const result = stmt.run({
+      id,
+      name: payload.name,
+      occupation: payload.occupation,
+      salaryBase: payload.salaryBase,
+      department: payload.department ?? "",
+      phone: payload.phone ?? "",
+      email: payload.email ?? ""
+    });
+    return { updated: result.changes > 0 };
+  });
+  ipcMain.handle("employees:delete", (_event, id) => {
+    const result = db2.prepare("DELETE FROM employees WHERE id = ?").run(id);
+    return { deleted: result.changes > 0 };
+  });
+  ipcMain.handle("payroll:send", (_event, payload) => {
+    const stmt = db2.prepare(
+      "INSERT INTO payroll_records (period, employeeCount, totalGross, totalNet, totalDeductions, details) VALUES (@period, @employeeCount, @totalGross, @totalNet, @totalDeductions, @details)"
+    );
+    const result = stmt.run({
+      period: payload.period,
+      employeeCount: payload.employeeCount,
+      totalGross: payload.totalGross,
+      totalNet: payload.totalNet,
+      totalDeductions: payload.totalDeductions,
+      details: JSON.stringify(payload.details ?? [])
+    });
+    return { id: Number(result.lastInsertRowid) };
+  });
+  ipcMain.handle(
+    "payroll:list",
+    () => db2.prepare(
+      "SELECT id, period, employeeCount, totalGross, totalNet, totalDeductions, sentAt FROM payroll_records ORDER BY sentAt DESC LIMIT 20"
+    ).all()
+  );
   ipcMain.handle("window:minimize", () => mainWindow?.minimize());
   ipcMain.handle("window:toggle-maximize", () => {
     if (!mainWindow) return false;

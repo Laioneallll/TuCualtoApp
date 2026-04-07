@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { Pencil, Plus, Search, Trash2 } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import type { UseFinance } from '../hooks/useFinance'
+import type { UsePayroll } from '../hooks/usePayroll'
 import type { Transaction } from '../types'
 import { formatRD } from '../utils/nominaCalc'
 import { AddTransactionModal } from './AddTransactionModal'
@@ -17,7 +18,7 @@ const headerLabel = (date: string): string => {
   return target.toLocaleDateString('es-DO', { weekday: 'long', day: '2-digit', month: 'short' }).toUpperCase()
 }
 
-export const Transactions = ({ finance }: { finance: UseFinance }): JSX.Element => {
+export const Transactions = ({ finance }: { finance: UseFinance; payroll: UsePayroll }): JSX.Element => {
   const [open, setOpen] = useState(false)
   const [editing, setEditing] = useState<Transaction | null>(null)
   const [query, setQuery] = useState('')
