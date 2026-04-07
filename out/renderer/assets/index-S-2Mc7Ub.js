@@ -14240,6 +14240,288 @@ const createMotionComponent = /* @__PURE__ */ createMotionComponentFactory({
   ...layout
 }, createDomVisualElement);
 const motion = /* @__PURE__ */ createDOMMotionComponentProxy(createMotionComponent);
+/**
+ * @license lucide-react v0.460.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const toKebabCase = (string2) => string2.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+const mergeClasses = (...classes) => classes.filter((className, index, array2) => {
+  return Boolean(className) && className.trim() !== "" && array2.indexOf(className) === index;
+}).join(" ").trim();
+/**
+ * @license lucide-react v0.460.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+var defaultAttributes = {
+  xmlns: "http://www.w3.org/2000/svg",
+  width: 24,
+  height: 24,
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 2,
+  strokeLinecap: "round",
+  strokeLinejoin: "round"
+};
+/**
+ * @license lucide-react v0.460.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Icon = reactExports.forwardRef(
+  ({
+    color: color2 = "currentColor",
+    size = 24,
+    strokeWidth = 2,
+    absoluteStrokeWidth,
+    className = "",
+    children,
+    iconNode,
+    ...rest
+  }, ref) => {
+    return reactExports.createElement(
+      "svg",
+      {
+        ref,
+        ...defaultAttributes,
+        width: size,
+        height: size,
+        stroke: color2,
+        strokeWidth: absoluteStrokeWidth ? Number(strokeWidth) * 24 / Number(size) : strokeWidth,
+        className: mergeClasses("lucide", className),
+        ...rest
+      },
+      [
+        ...iconNode.map(([tag, attrs]) => reactExports.createElement(tag, attrs)),
+        ...Array.isArray(children) ? children : [children]
+      ]
+    );
+  }
+);
+/**
+ * @license lucide-react v0.460.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const createLucideIcon = (iconName, iconNode) => {
+  const Component = reactExports.forwardRef(
+    ({ className, ...props }, ref) => reactExports.createElement(Icon, {
+      ref,
+      iconNode,
+      className: mergeClasses(`lucide-${toKebabCase(iconName)}`, className),
+      ...props
+    })
+  );
+  Component.displayName = `${iconName}`;
+  return Component;
+};
+/**
+ * @license lucide-react v0.460.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const ArrowLeftRight = createLucideIcon("ArrowLeftRight", [
+  ["path", { d: "M8 3 4 7l4 4", key: "9rb6wj" }],
+  ["path", { d: "M4 7h16", key: "6tx8e3" }],
+  ["path", { d: "m16 21 4-4-4-4", key: "siv7j2" }],
+  ["path", { d: "M20 17H4", key: "h6l3hr" }]
+]);
+/**
+ * @license lucide-react v0.460.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Calculator = createLucideIcon("Calculator", [
+  ["rect", { width: "16", height: "20", x: "4", y: "2", rx: "2", key: "1nb95v" }],
+  ["line", { x1: "8", x2: "16", y1: "6", y2: "6", key: "x4nwl0" }],
+  ["line", { x1: "16", x2: "16", y1: "14", y2: "18", key: "wjye3r" }],
+  ["path", { d: "M16 10h.01", key: "1m94wz" }],
+  ["path", { d: "M12 10h.01", key: "1nrarc" }],
+  ["path", { d: "M8 10h.01", key: "19clt8" }],
+  ["path", { d: "M12 14h.01", key: "1etili" }],
+  ["path", { d: "M8 14h.01", key: "6423bh" }],
+  ["path", { d: "M12 18h.01", key: "mhygvu" }],
+  ["path", { d: "M8 18h.01", key: "lrp35t" }]
+]);
+/**
+ * @license lucide-react v0.460.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Check = createLucideIcon("Check", [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]]);
+/**
+ * @license lucide-react v0.460.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const FileText = createLucideIcon("FileText", [
+  ["path", { d: "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z", key: "1rqfz7" }],
+  ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
+  ["path", { d: "M10 9H8", key: "b1mrlr" }],
+  ["path", { d: "M16 13H8", key: "t4e002" }],
+  ["path", { d: "M16 17H8", key: "z1uh3a" }]
+]);
+/**
+ * @license lucide-react v0.460.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const History = createLucideIcon("History", [
+  ["path", { d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8", key: "1357e3" }],
+  ["path", { d: "M3 3v5h5", key: "1xhq8a" }],
+  ["path", { d: "M12 7v5l4 2", key: "1fdv2h" }]
+]);
+/**
+ * @license lucide-react v0.460.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const LayoutDashboard = createLucideIcon("LayoutDashboard", [
+  ["rect", { width: "7", height: "9", x: "3", y: "3", rx: "1", key: "10lvy0" }],
+  ["rect", { width: "7", height: "5", x: "14", y: "3", rx: "1", key: "16une8" }],
+  ["rect", { width: "7", height: "9", x: "14", y: "12", rx: "1", key: "1hutg5" }],
+  ["rect", { width: "7", height: "5", x: "3", y: "16", rx: "1", key: "ldoo1y" }]
+]);
+/**
+ * @license lucide-react v0.460.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Minus = createLucideIcon("Minus", [["path", { d: "M5 12h14", key: "1ays0h" }]]);
+/**
+ * @license lucide-react v0.460.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Pencil = createLucideIcon("Pencil", [
+  [
+    "path",
+    {
+      d: "M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z",
+      key: "1a8usu"
+    }
+  ],
+  ["path", { d: "m15 5 4 4", key: "1mk7zo" }]
+]);
+/**
+ * @license lucide-react v0.460.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Plus = createLucideIcon("Plus", [
+  ["path", { d: "M5 12h14", key: "1ays0h" }],
+  ["path", { d: "M12 5v14", key: "s699le" }]
+]);
+/**
+ * @license lucide-react v0.460.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Search = createLucideIcon("Search", [
+  ["circle", { cx: "11", cy: "11", r: "8", key: "4ej97u" }],
+  ["path", { d: "m21 21-4.3-4.3", key: "1qie3q" }]
+]);
+/**
+ * @license lucide-react v0.460.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Send = createLucideIcon("Send", [
+  [
+    "path",
+    {
+      d: "M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z",
+      key: "1ffxy3"
+    }
+  ],
+  ["path", { d: "m21.854 2.147-10.94 10.939", key: "12cjpa" }]
+]);
+/**
+ * @license lucide-react v0.460.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Square = createLucideIcon("Square", [
+  ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", key: "afitv7" }]
+]);
+/**
+ * @license lucide-react v0.460.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Trash2 = createLucideIcon("Trash2", [
+  ["path", { d: "M3 6h18", key: "d0wm0j" }],
+  ["path", { d: "M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6", key: "4alrt4" }],
+  ["path", { d: "M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2", key: "v07s0e" }],
+  ["line", { x1: "10", x2: "10", y1: "11", y2: "17", key: "1uufr5" }],
+  ["line", { x1: "14", x2: "14", y1: "11", y2: "17", key: "xtxkd" }]
+]);
+/**
+ * @license lucide-react v0.460.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const User = createLucideIcon("User", [
+  ["path", { d: "M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2", key: "975kel" }],
+  ["circle", { cx: "12", cy: "7", r: "4", key: "17ys0d" }]
+]);
+/**
+ * @license lucide-react v0.460.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Users = createLucideIcon("Users", [
+  ["path", { d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2", key: "1yyitq" }],
+  ["circle", { cx: "9", cy: "7", r: "4", key: "nufk8" }],
+  ["path", { d: "M22 21v-2a4 4 0 0 0-3-3.87", key: "kshegd" }],
+  ["path", { d: "M16 3.13a4 4 0 0 1 0 7.75", key: "1da9ce" }]
+]);
+/**
+ * @license lucide-react v0.460.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const X = createLucideIcon("X", [
+  ["path", { d: "M18 6 6 18", key: "1bl5f8" }],
+  ["path", { d: "m6 6 12 12", key: "d8bk6v" }]
+]);
+/**
+ * @license lucide-react v0.460.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Zap = createLucideIcon("Zap", [
+  [
+    "path",
+    {
+      d: "M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z",
+      key: "1xq2db"
+    }
+  ]
+]);
 function r(e3) {
   var t2, f2, n2 = "";
   if ("string" == typeof e3 || "number" == typeof e3) n2 += e3;
@@ -18423,20 +18705,20 @@ function _extends$q() {
   return _extends$q.apply(this, arguments);
 }
 function _slicedToArray$c(arr, i) {
-  return _arrayWithHoles$d(arr) || _iterableToArrayLimit$c(arr, i) || _unsupportedIterableToArray$l(arr, i) || _nonIterableRest$d();
+  return _arrayWithHoles$d(arr) || _iterableToArrayLimit$c(arr, i) || _unsupportedIterableToArray$k(arr, i) || _nonIterableRest$d();
 }
 function _nonIterableRest$d() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$l(o, minLen) {
+function _unsupportedIterableToArray$k(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$l(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$k(o, minLen);
   var n2 = Object.prototype.toString.call(o).slice(8, -1);
   if (n2 === "Object" && o.constructor) n2 = o.constructor.name;
   if (n2 === "Map" || n2 === "Set") return Array.from(o);
-  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$l(o, minLen);
+  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$k(o, minLen);
 }
-function _arrayLikeToArray$l(arr, len) {
+function _arrayLikeToArray$k(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
@@ -19360,20 +19642,20 @@ function _toPrimitive$B(t2, r2) {
   return ("string" === r2 ? String : Number)(t2);
 }
 function _slicedToArray$b(arr, i) {
-  return _arrayWithHoles$c(arr) || _iterableToArrayLimit$b(arr, i) || _unsupportedIterableToArray$k(arr, i) || _nonIterableRest$c();
+  return _arrayWithHoles$c(arr) || _iterableToArrayLimit$b(arr, i) || _unsupportedIterableToArray$j(arr, i) || _nonIterableRest$c();
 }
 function _nonIterableRest$c() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$k(o, minLen) {
+function _unsupportedIterableToArray$j(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$k(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$j(o, minLen);
   var n2 = Object.prototype.toString.call(o).slice(8, -1);
   if (n2 === "Object" && o.constructor) n2 = o.constructor.name;
   if (n2 === "Map" || n2 === "Set") return Array.from(o);
-  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$k(o, minLen);
+  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$j(o, minLen);
 }
-function _arrayLikeToArray$k(arr, len) {
+function _arrayLikeToArray$j(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
@@ -19646,20 +19928,20 @@ function _typeof$A(o) {
   }, _typeof$A(o);
 }
 function _slicedToArray$a(arr, i) {
-  return _arrayWithHoles$b(arr) || _iterableToArrayLimit$a(arr, i) || _unsupportedIterableToArray$j(arr, i) || _nonIterableRest$b();
+  return _arrayWithHoles$b(arr) || _iterableToArrayLimit$a(arr, i) || _unsupportedIterableToArray$i(arr, i) || _nonIterableRest$b();
 }
 function _nonIterableRest$b() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$j(o, minLen) {
+function _unsupportedIterableToArray$i(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$j(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$i(o, minLen);
   var n2 = Object.prototype.toString.call(o).slice(8, -1);
   if (n2 === "Object" && o.constructor) n2 = o.constructor.name;
   if (n2 === "Map" || n2 === "Set") return Array.from(o);
-  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$j(o, minLen);
+  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$i(o, minLen);
 }
-function _arrayLikeToArray$j(arr, len) {
+function _arrayLikeToArray$i(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
@@ -19910,20 +20192,20 @@ function _objectWithoutPropertiesLoose$e(source, excluded) {
   return target;
 }
 function _slicedToArray$9(arr, i) {
-  return _arrayWithHoles$a(arr) || _iterableToArrayLimit$9(arr, i) || _unsupportedIterableToArray$i(arr, i) || _nonIterableRest$a();
+  return _arrayWithHoles$a(arr) || _iterableToArrayLimit$9(arr, i) || _unsupportedIterableToArray$h(arr, i) || _nonIterableRest$a();
 }
 function _nonIterableRest$a() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$i(o, minLen) {
+function _unsupportedIterableToArray$h(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$i(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$h(o, minLen);
   var n2 = Object.prototype.toString.call(o).slice(8, -1);
   if (n2 === "Object" && o.constructor) n2 = o.constructor.name;
   if (n2 === "Map" || n2 === "Set") return Array.from(o);
-  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$i(o, minLen);
+  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$h(o, minLen);
 }
-function _arrayLikeToArray$i(arr, len) {
+function _arrayLikeToArray$h(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
@@ -20447,15 +20729,15 @@ function ordinal() {
   return scale2;
 }
 function band() {
-  var scale2 = ordinal().unknown(void 0), domain = scale2.domain, ordinalRange = scale2.range, r0 = 0, r1 = 1, step, bandwidth, round2 = false, paddingInner = 0, paddingOuter = 0, align = 0.5;
+  var scale2 = ordinal().unknown(void 0), domain = scale2.domain, ordinalRange = scale2.range, r0 = 0, r1 = 1, step, bandwidth, round3 = false, paddingInner = 0, paddingOuter = 0, align = 0.5;
   delete scale2.unknown;
   function rescale() {
     var n2 = domain().length, reverse3 = r1 < r0, start = reverse3 ? r1 : r0, stop = reverse3 ? r0 : r1;
     step = (stop - start) / Math.max(1, n2 - paddingInner + paddingOuter * 2);
-    if (round2) step = Math.floor(step);
+    if (round3) step = Math.floor(step);
     start += (stop - start - step * (n2 - paddingInner)) * align;
     bandwidth = step * (1 - paddingInner);
-    if (round2) start = Math.round(start), bandwidth = Math.round(bandwidth);
+    if (round3) start = Math.round(start), bandwidth = Math.round(bandwidth);
     var values = range$3(n2).map(function(i) {
       return start + step * i;
     });
@@ -20468,7 +20750,7 @@ function band() {
     return arguments.length ? ([r0, r1] = _, r0 = +r0, r1 = +r1, rescale()) : [r0, r1];
   };
   scale2.rangeRound = function(_) {
-    return [r0, r1] = _, r0 = +r0, r1 = +r1, round2 = true, rescale();
+    return [r0, r1] = _, r0 = +r0, r1 = +r1, round3 = true, rescale();
   };
   scale2.bandwidth = function() {
     return bandwidth;
@@ -20477,7 +20759,7 @@ function band() {
     return step;
   };
   scale2.round = function(_) {
-    return arguments.length ? (round2 = !!_, rescale()) : round2;
+    return arguments.length ? (round3 = !!_, rescale()) : round3;
   };
   scale2.padding = function(_) {
     return arguments.length ? (paddingInner = Math.min(1, paddingOuter = +_), rescale()) : paddingInner;
@@ -20492,7 +20774,7 @@ function band() {
     return arguments.length ? (align = Math.max(0, Math.min(1, _)), rescale()) : align;
   };
   scale2.copy = function() {
-    return band(domain(), [r0, r1]).round(round2).paddingInner(paddingInner).paddingOuter(paddingOuter).align(align);
+    return band(domain(), [r0, r1]).round(round3).paddingInner(paddingInner).paddingOuter(paddingOuter).align(align);
   };
   return initRange.apply(rescale(), arguments);
 }
@@ -21565,10 +21847,10 @@ function unsquare(x2) {
   return Math.sign(x2) * Math.sqrt(Math.abs(x2));
 }
 function radial() {
-  var squared = continuous(), range3 = [0, 1], round2 = false, unknown;
+  var squared = continuous(), range3 = [0, 1], round3 = false, unknown;
   function scale2(x2) {
     var y2 = unsquare(squared(x2));
-    return isNaN(y2) ? unknown : round2 ? Math.round(y2) : y2;
+    return isNaN(y2) ? unknown : round3 ? Math.round(y2) : y2;
   }
   scale2.invert = function(y2) {
     return squared.invert(square(y2));
@@ -21583,7 +21865,7 @@ function radial() {
     return scale2.range(_).round(true);
   };
   scale2.round = function(_) {
-    return arguments.length ? (round2 = !!_, scale2) : round2;
+    return arguments.length ? (round3 = !!_, scale2) : round3;
   };
   scale2.clamp = function(_) {
     return arguments.length ? (squared.clamp(_), scale2) : squared.clamp();
@@ -21592,7 +21874,7 @@ function radial() {
     return arguments.length ? (unknown = _, scale2) : unknown;
   };
   scale2.copy = function() {
-    return radial(squared.domain(), range3).round(round2).clamp(squared.clamp()).unknown(unknown);
+    return radial(squared.domain(), range3).round(round3).clamp(squared.clamp()).unknown(unknown);
   };
   initRange.apply(scale2, arguments);
   return linearish(scale2);
@@ -23795,27 +24077,27 @@ function config(obj) {
 var Decimal = clone(defaults);
 ONE = new Decimal(1);
 const Decimal$1 = Decimal;
-function _toConsumableArray$b(arr) {
-  return _arrayWithoutHoles$b(arr) || _iterableToArray$c(arr) || _unsupportedIterableToArray$h(arr) || _nonIterableSpread$b();
+function _toConsumableArray$a(arr) {
+  return _arrayWithoutHoles$a(arr) || _iterableToArray$b(arr) || _unsupportedIterableToArray$g(arr) || _nonIterableSpread$a();
 }
-function _nonIterableSpread$b() {
+function _nonIterableSpread$a() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$h(o, minLen) {
+function _unsupportedIterableToArray$g(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$h(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$g(o, minLen);
   var n2 = Object.prototype.toString.call(o).slice(8, -1);
   if (n2 === "Object" && o.constructor) n2 = o.constructor.name;
   if (n2 === "Map" || n2 === "Set") return Array.from(o);
-  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$h(o, minLen);
+  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$g(o, minLen);
 }
-function _iterableToArray$c(iter) {
+function _iterableToArray$b(iter) {
   if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
 }
-function _arrayWithoutHoles$b(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray$h(arr);
+function _arrayWithoutHoles$a(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray$g(arr);
 }
-function _arrayLikeToArray$h(arr, len) {
+function _arrayLikeToArray$g(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++) {
     arr2[i] = arr[i];
@@ -23858,7 +24140,7 @@ var curryN = function curryN2(n2, fn) {
       var newArgs = args.map(function(arg) {
         return isPlaceHolder(arg) ? restArgs.shift() : arg;
       });
-      return fn.apply(void 0, _toConsumableArray$b(newArgs).concat(restArgs));
+      return fn.apply(void 0, _toConsumableArray$a(newArgs).concat(restArgs));
     }));
   });
 };
@@ -23961,33 +24243,33 @@ const Arithmetic = {
   uninterpolateNumber,
   uninterpolateTruncation
 };
-function _toConsumableArray$a(arr) {
-  return _arrayWithoutHoles$a(arr) || _iterableToArray$b(arr) || _unsupportedIterableToArray$g(arr) || _nonIterableSpread$a();
+function _toConsumableArray$9(arr) {
+  return _arrayWithoutHoles$9(arr) || _iterableToArray$a(arr) || _unsupportedIterableToArray$f(arr) || _nonIterableSpread$9();
 }
-function _nonIterableSpread$a() {
+function _nonIterableSpread$9() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _iterableToArray$b(iter) {
+function _iterableToArray$a(iter) {
   if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
 }
-function _arrayWithoutHoles$a(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray$g(arr);
+function _arrayWithoutHoles$9(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray$f(arr);
 }
 function _slicedToArray$8(arr, i) {
-  return _arrayWithHoles$9(arr) || _iterableToArrayLimit$8(arr, i) || _unsupportedIterableToArray$g(arr, i) || _nonIterableRest$9();
+  return _arrayWithHoles$9(arr) || _iterableToArrayLimit$8(arr, i) || _unsupportedIterableToArray$f(arr, i) || _nonIterableRest$9();
 }
 function _nonIterableRest$9() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$g(o, minLen) {
+function _unsupportedIterableToArray$f(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$g(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$f(o, minLen);
   var n2 = Object.prototype.toString.call(o).slice(8, -1);
   if (n2 === "Object" && o.constructor) n2 = o.constructor.name;
   if (n2 === "Map" || n2 === "Set") return Array.from(o);
-  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$g(o, minLen);
+  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$f(o, minLen);
 }
-function _arrayLikeToArray$g(arr, len) {
+function _arrayLikeToArray$f(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++) {
     arr2[i] = arr[i];
@@ -24103,9 +24385,9 @@ function getNiceTickValuesFn(_ref3) {
   var count = Math.max(tickCount, 2);
   var _getValidInterval = getValidInterval([min2, max2]), _getValidInterval2 = _slicedToArray$8(_getValidInterval, 2), cormin = _getValidInterval2[0], cormax = _getValidInterval2[1];
   if (cormin === -Infinity || cormax === Infinity) {
-    var _values = cormax === Infinity ? [cormin].concat(_toConsumableArray$a(range$2(0, tickCount - 1).map(function() {
+    var _values = cormax === Infinity ? [cormin].concat(_toConsumableArray$9(range$2(0, tickCount - 1).map(function() {
       return Infinity;
-    }))) : [].concat(_toConsumableArray$a(range$2(0, tickCount - 1).map(function() {
+    }))) : [].concat(_toConsumableArray$9(range$2(0, tickCount - 1).map(function() {
       return -Infinity;
     })), [cormax]);
     return min2 > max2 ? reverse(_values) : _values;
@@ -24129,7 +24411,7 @@ function getTickValuesFixedDomainFn(_ref7, tickCount) {
   }
   var count = Math.max(tickCount, 2);
   var step = getFormatStep(new Decimal$1(cormax).sub(cormin).div(count - 1), allowDecimals, 0);
-  var values = [].concat(_toConsumableArray$a(Arithmetic.rangeStep(new Decimal$1(cormin), new Decimal$1(cormax).sub(new Decimal$1(0.99).mul(step)), step)), [cormax]);
+  var values = [].concat(_toConsumableArray$9(Arithmetic.rangeStep(new Decimal$1(cormin), new Decimal$1(cormax).sub(new Decimal$1(0.99).mul(step)), step)), [cormax]);
   return min2 > max2 ? reverse(values) : values;
 }
 var getNiceTickValues = memoize(getNiceTickValuesFn);
@@ -24164,20 +24446,20 @@ function _extends$o() {
   return _extends$o.apply(this, arguments);
 }
 function _slicedToArray$7(arr, i) {
-  return _arrayWithHoles$8(arr) || _iterableToArrayLimit$7(arr, i) || _unsupportedIterableToArray$f(arr, i) || _nonIterableRest$8();
+  return _arrayWithHoles$8(arr) || _iterableToArrayLimit$7(arr, i) || _unsupportedIterableToArray$e(arr, i) || _nonIterableRest$8();
 }
 function _nonIterableRest$8() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$f(o, minLen) {
+function _unsupportedIterableToArray$e(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$f(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$e(o, minLen);
   var n2 = Object.prototype.toString.call(o).slice(8, -1);
   if (n2 === "Object" && o.constructor) n2 = o.constructor.name;
   if (n2 === "Map" || n2 === "Set") return Array.from(o);
-  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$f(o, minLen);
+  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$e(o, minLen);
 }
-function _arrayLikeToArray$f(arr, len) {
+function _arrayLikeToArray$e(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
@@ -24528,27 +24810,27 @@ function _typeof$x(o) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
   }, _typeof$x(o);
 }
-function _toConsumableArray$9(arr) {
-  return _arrayWithoutHoles$9(arr) || _iterableToArray$a(arr) || _unsupportedIterableToArray$e(arr) || _nonIterableSpread$9();
+function _toConsumableArray$8(arr) {
+  return _arrayWithoutHoles$8(arr) || _iterableToArray$9(arr) || _unsupportedIterableToArray$d(arr) || _nonIterableSpread$8();
 }
-function _nonIterableSpread$9() {
+function _nonIterableSpread$8() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$e(o, minLen) {
+function _unsupportedIterableToArray$d(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$e(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$d(o, minLen);
   var n2 = Object.prototype.toString.call(o).slice(8, -1);
   if (n2 === "Object" && o.constructor) n2 = o.constructor.name;
   if (n2 === "Map" || n2 === "Set") return Array.from(o);
-  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$e(o, minLen);
+  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$d(o, minLen);
 }
-function _iterableToArray$a(iter) {
+function _iterableToArray$9(iter) {
   if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
-function _arrayWithoutHoles$9(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray$e(arr);
+function _arrayWithoutHoles$8(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray$d(arr);
 }
-function _arrayLikeToArray$e(arr, len) {
+function _arrayLikeToArray$d(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
@@ -24771,7 +25053,7 @@ var getBarPosition = function getBarPosition2(_ref3) {
           size: useFull ? fullBarSize : entry.barSize
         }
       };
-      var newRes = [].concat(_toConsumableArray$9(res), [newPosition]);
+      var newRes = [].concat(_toConsumableArray$8(res), [newPosition]);
       prev = newRes[newRes.length - 1].position;
       if (entry.stackList && entry.stackList.length) {
         entry.stackList.forEach(function(item) {
@@ -24794,7 +25076,7 @@ var getBarPosition = function getBarPosition2(_ref3) {
     }
     var size = maxBarSize === +maxBarSize ? Math.min(originalSize, maxBarSize) : originalSize;
     result = sizeList.reduce(function(res, entry, i) {
-      var newRes = [].concat(_toConsumableArray$9(res), [{
+      var newRes = [].concat(_toConsumableArray$8(res), [{
         item: entry.item,
         position: {
           offset: _offset + (originalSize + realBarGap) * i + (originalSize - size) / 2,
@@ -25451,20 +25733,20 @@ function _toPrimitive$v(t2, r2) {
   return ("string" === r2 ? String : Number)(t2);
 }
 function _slicedToArray$6(arr, i) {
-  return _arrayWithHoles$7(arr) || _iterableToArrayLimit$6(arr, i) || _unsupportedIterableToArray$d(arr, i) || _nonIterableRest$7();
+  return _arrayWithHoles$7(arr) || _iterableToArrayLimit$6(arr, i) || _unsupportedIterableToArray$c(arr, i) || _nonIterableRest$7();
 }
 function _nonIterableRest$7() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$d(o, minLen) {
+function _unsupportedIterableToArray$c(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$d(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$c(o, minLen);
   var n2 = Object.prototype.toString.call(o).slice(8, -1);
   if (n2 === "Object" && o.constructor) n2 = o.constructor.name;
   if (n2 === "Map" || n2 === "Set") return Array.from(o);
-  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$d(o, minLen);
+  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$c(o, minLen);
 }
-function _arrayLikeToArray$d(arr, len) {
+function _arrayLikeToArray$c(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
@@ -25661,27 +25943,27 @@ function _typeof$v(o) {
   }, _typeof$v(o);
 }
 var _excluded$c = ["offset"];
-function _toConsumableArray$8(arr) {
-  return _arrayWithoutHoles$8(arr) || _iterableToArray$9(arr) || _unsupportedIterableToArray$c(arr) || _nonIterableSpread$8();
+function _toConsumableArray$7(arr) {
+  return _arrayWithoutHoles$7(arr) || _iterableToArray$8(arr) || _unsupportedIterableToArray$b(arr) || _nonIterableSpread$7();
 }
-function _nonIterableSpread$8() {
+function _nonIterableSpread$7() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$c(o, minLen) {
+function _unsupportedIterableToArray$b(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$c(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$b(o, minLen);
   var n2 = Object.prototype.toString.call(o).slice(8, -1);
   if (n2 === "Object" && o.constructor) n2 = o.constructor.name;
   if (n2 === "Map" || n2 === "Set") return Array.from(o);
-  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$c(o, minLen);
+  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$b(o, minLen);
 }
-function _iterableToArray$9(iter) {
+function _iterableToArray$8(iter) {
   if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
-function _arrayWithoutHoles$8(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray$c(arr);
+function _arrayWithoutHoles$7(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray$b(arr);
 }
-function _arrayLikeToArray$c(arr, len) {
+function _arrayLikeToArray$b(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
@@ -26151,7 +26433,7 @@ var renderCallByParent$1 = function renderCallByParent(parentProps, viewBox) {
     return explicitChildren;
   }
   var implicitLabel = parseLabel(parentProps.label, viewBox || parentViewBox);
-  return [implicitLabel].concat(_toConsumableArray$8(explicitChildren));
+  return [implicitLabel].concat(_toConsumableArray$7(explicitChildren));
 };
 Label.parseViewBox = parseViewBox;
 Label.renderCallByParent = renderCallByParent$1;
@@ -26170,27 +26452,27 @@ function _typeof$u(o) {
   }, _typeof$u(o);
 }
 var _excluded$b = ["valueAccessor"], _excluded2$5 = ["data", "dataKey", "clockWise", "id", "textBreakAll"];
-function _toConsumableArray$7(arr) {
-  return _arrayWithoutHoles$7(arr) || _iterableToArray$8(arr) || _unsupportedIterableToArray$b(arr) || _nonIterableSpread$7();
+function _toConsumableArray$6(arr) {
+  return _arrayWithoutHoles$6(arr) || _iterableToArray$7(arr) || _unsupportedIterableToArray$a(arr) || _nonIterableSpread$6();
 }
-function _nonIterableSpread$7() {
+function _nonIterableSpread$6() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$b(o, minLen) {
+function _unsupportedIterableToArray$a(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$b(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$a(o, minLen);
   var n2 = Object.prototype.toString.call(o).slice(8, -1);
   if (n2 === "Object" && o.constructor) n2 = o.constructor.name;
   if (n2 === "Map" || n2 === "Set") return Array.from(o);
-  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$b(o, minLen);
+  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$a(o, minLen);
 }
-function _iterableToArray$8(iter) {
+function _iterableToArray$7(iter) {
   if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
-function _arrayWithoutHoles$7(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray$b(arr);
+function _arrayWithoutHoles$6(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray$a(arr);
 }
-function _arrayLikeToArray$b(arr, len) {
+function _arrayLikeToArray$a(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
@@ -26351,7 +26633,7 @@ function renderCallByParent2(parentProps, data) {
     return explicitChildren;
   }
   var implicitLabelList = parseLabelList(parentProps.label, data);
-  return [implicitLabelList].concat(_toConsumableArray$7(explicitChildren));
+  return [implicitLabelList].concat(_toConsumableArray$6(explicitChildren));
 }
 LabelList.renderCallByParent = renderCallByParent2;
 function _typeof$t(o) {
@@ -27242,25 +27524,25 @@ function _typeof$r(o) {
   }, _typeof$r(o);
 }
 function _toArray(arr) {
-  return _arrayWithHoles$6(arr) || _iterableToArray$7(arr) || _unsupportedIterableToArray$a(arr) || _nonIterableRest$6();
+  return _arrayWithHoles$6(arr) || _iterableToArray$6(arr) || _unsupportedIterableToArray$9(arr) || _nonIterableRest$6();
 }
 function _nonIterableRest$6() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$a(o, minLen) {
+function _unsupportedIterableToArray$9(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$a(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$9(o, minLen);
   var n2 = Object.prototype.toString.call(o).slice(8, -1);
   if (n2 === "Object" && o.constructor) n2 = o.constructor.name;
   if (n2 === "Map" || n2 === "Set") return Array.from(o);
-  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$a(o, minLen);
+  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$9(o, minLen);
 }
-function _arrayLikeToArray$a(arr, len) {
+function _arrayLikeToArray$9(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
 }
-function _iterableToArray$7(iter) {
+function _iterableToArray$6(iter) {
   if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
 function _arrayWithHoles$6(arr) {
@@ -27394,7 +27676,7 @@ var getTransitionVal = function getTransitionVal2(props, duration, easing) {
   }).join(",");
 };
 function _slicedToArray$5(arr, i) {
-  return _arrayWithHoles$5(arr) || _iterableToArrayLimit$5(arr, i) || _unsupportedIterableToArray$9(arr, i) || _nonIterableRest$5();
+  return _arrayWithHoles$5(arr) || _iterableToArrayLimit$5(arr, i) || _unsupportedIterableToArray$8(arr, i) || _nonIterableRest$5();
 }
 function _nonIterableRest$5() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
@@ -27421,27 +27703,27 @@ function _iterableToArrayLimit$5(r2, l2) {
 function _arrayWithHoles$5(arr) {
   if (Array.isArray(arr)) return arr;
 }
-function _toConsumableArray$6(arr) {
-  return _arrayWithoutHoles$6(arr) || _iterableToArray$6(arr) || _unsupportedIterableToArray$9(arr) || _nonIterableSpread$6();
+function _toConsumableArray$5(arr) {
+  return _arrayWithoutHoles$5(arr) || _iterableToArray$5(arr) || _unsupportedIterableToArray$8(arr) || _nonIterableSpread$5();
 }
-function _nonIterableSpread$6() {
+function _nonIterableSpread$5() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$9(o, minLen) {
+function _unsupportedIterableToArray$8(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$9(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$8(o, minLen);
   var n2 = Object.prototype.toString.call(o).slice(8, -1);
   if (n2 === "Object" && o.constructor) n2 = o.constructor.name;
   if (n2 === "Map" || n2 === "Set") return Array.from(o);
-  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$9(o, minLen);
+  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$8(o, minLen);
 }
-function _iterableToArray$6(iter) {
+function _iterableToArray$5(iter) {
   if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
-function _arrayWithoutHoles$6(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray$9(arr);
+function _arrayWithoutHoles$5(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray$8(arr);
 }
-function _arrayLikeToArray$9(arr, len) {
+function _arrayLikeToArray$8(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
@@ -27466,7 +27748,7 @@ var cubicBezier = function cubicBezier2(c1, c2) {
 var derivativeCubicBezier = function derivativeCubicBezier2(c1, c2) {
   return function(t2) {
     var params = cubicBezierFactor(c1, c2);
-    var newParams = [].concat(_toConsumableArray$6(params.map(function(param, i) {
+    var newParams = [].concat(_toConsumableArray$5(params.map(function(param, i) {
       return param * i;
     }).slice(1)), [0]);
     return multyTime(newParams, t2);
@@ -27603,17 +27885,17 @@ function _typeof$p(o) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
   }, _typeof$p(o);
 }
-function _toConsumableArray$5(arr) {
-  return _arrayWithoutHoles$5(arr) || _iterableToArray$5(arr) || _unsupportedIterableToArray$8(arr) || _nonIterableSpread$5();
+function _toConsumableArray$4(arr) {
+  return _arrayWithoutHoles$4(arr) || _iterableToArray$4(arr) || _unsupportedIterableToArray$7(arr) || _nonIterableSpread$4();
 }
-function _nonIterableSpread$5() {
+function _nonIterableSpread$4() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _iterableToArray$5(iter) {
+function _iterableToArray$4(iter) {
   if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
-function _arrayWithoutHoles$5(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray$8(arr);
+function _arrayWithoutHoles$4(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray$7(arr);
 }
 function ownKeys$m(e3, r2) {
   var t2 = Object.keys(e3);
@@ -27660,20 +27942,20 @@ function _toPrimitive$p(input, hint) {
   return (hint === "string" ? String : Number)(input);
 }
 function _slicedToArray$4(arr, i) {
-  return _arrayWithHoles$4(arr) || _iterableToArrayLimit$4(arr, i) || _unsupportedIterableToArray$8(arr, i) || _nonIterableRest$4();
+  return _arrayWithHoles$4(arr) || _iterableToArrayLimit$4(arr, i) || _unsupportedIterableToArray$7(arr, i) || _nonIterableRest$4();
 }
 function _nonIterableRest$4() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$8(o, minLen) {
+function _unsupportedIterableToArray$7(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$8(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$7(o, minLen);
   var n2 = Object.prototype.toString.call(o).slice(8, -1);
   if (n2 === "Object" && o.constructor) n2 = o.constructor.name;
   if (n2 === "Map" || n2 === "Set") return Array.from(o);
-  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$8(o, minLen);
+  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$7(o, minLen);
 }
-function _arrayLikeToArray$8(arr, len) {
+function _arrayLikeToArray$7(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
@@ -27776,14 +28058,14 @@ const configUpdate = function(from, to, easing, duration, render) {
     }
     var t2 = (now2 - beginTime) / duration;
     var currStyle = mapObject(function(key, val) {
-      return alpha.apply(void 0, _toConsumableArray$5(val).concat([easing(t2)]));
+      return alpha.apply(void 0, _toConsumableArray$4(val).concat([easing(t2)]));
     }, timingStyle);
     render(_objectSpread$m(_objectSpread$m(_objectSpread$m({}, from), to), currStyle));
     if (t2 < 1) {
       cafId = requestAnimationFrame(update);
     } else {
       var finalStyle = mapObject(function(key, val) {
-        return alpha.apply(void 0, _toConsumableArray$5(val).concat([easing(1)]));
+        return alpha.apply(void 0, _toConsumableArray$4(val).concat([easing(1)]));
       }, timingStyle);
       render(_objectSpread$m(_objectSpread$m(_objectSpread$m({}, from), to), finalStyle));
     }
@@ -27832,27 +28114,27 @@ function _objectWithoutPropertiesLoose$a(source, excluded) {
   }
   return target;
 }
-function _toConsumableArray$4(arr) {
-  return _arrayWithoutHoles$4(arr) || _iterableToArray$4(arr) || _unsupportedIterableToArray$7(arr) || _nonIterableSpread$4();
+function _toConsumableArray$3(arr) {
+  return _arrayWithoutHoles$3(arr) || _iterableToArray$3(arr) || _unsupportedIterableToArray$6(arr) || _nonIterableSpread$3();
 }
-function _nonIterableSpread$4() {
+function _nonIterableSpread$3() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$7(o, minLen) {
+function _unsupportedIterableToArray$6(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$7(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$6(o, minLen);
   var n2 = Object.prototype.toString.call(o).slice(8, -1);
   if (n2 === "Object" && o.constructor) n2 = o.constructor.name;
   if (n2 === "Map" || n2 === "Set") return Array.from(o);
-  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$7(o, minLen);
+  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$6(o, minLen);
 }
-function _iterableToArray$4(iter) {
+function _iterableToArray$3(iter) {
   if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
-function _arrayWithoutHoles$4(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray$7(arr);
+function _arrayWithoutHoles$3(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray$6(arr);
 }
-function _arrayLikeToArray$7(arr, len) {
+function _arrayLikeToArray$6(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
@@ -28133,7 +28415,7 @@ var Animate = /* @__PURE__ */ function(_PureComponent) {
         var preItem = index > 0 ? steps[index - 1] : nextItem;
         var properties = nextProperties || Object.keys(style);
         if (typeof easing === "function" || easing === "spring") {
-          return [].concat(_toConsumableArray$4(sequence), [_this3.runJSAnimation.bind(_this3, {
+          return [].concat(_toConsumableArray$3(sequence), [_this3.runJSAnimation.bind(_this3, {
             from: preItem.style,
             to: style,
             duration,
@@ -28144,9 +28426,9 @@ var Animate = /* @__PURE__ */ function(_PureComponent) {
         var newStyle = _objectSpread$l(_objectSpread$l(_objectSpread$l({}, preItem.style), style), {}, {
           transition
         });
-        return [].concat(_toConsumableArray$4(sequence), [newStyle, duration, onAnimationEnd2]).filter(identity2);
+        return [].concat(_toConsumableArray$3(sequence), [newStyle, duration, onAnimationEnd2]).filter(identity2);
       };
-      return this.manager.start([onAnimationStart2].concat(_toConsumableArray$4(steps.reduce(addStyle, [initialStyle, Math.max(initialTime, begin)])), [props.onAnimationEnd]));
+      return this.manager.start([onAnimationStart2].concat(_toConsumableArray$3(steps.reduce(addStyle, [initialStyle, Math.max(initialTime, begin)])), [props.onAnimationEnd]));
     }
   }, {
     key: "runAnimation",
@@ -28278,20 +28560,20 @@ function _extends$j() {
   return _extends$j.apply(this, arguments);
 }
 function _slicedToArray$3(arr, i) {
-  return _arrayWithHoles$3(arr) || _iterableToArrayLimit$3(arr, i) || _unsupportedIterableToArray$6(arr, i) || _nonIterableRest$3();
+  return _arrayWithHoles$3(arr) || _iterableToArrayLimit$3(arr, i) || _unsupportedIterableToArray$5(arr, i) || _nonIterableRest$3();
 }
 function _nonIterableRest$3() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$6(o, minLen) {
+function _unsupportedIterableToArray$5(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$6(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$5(o, minLen);
   var n2 = Object.prototype.toString.call(o).slice(8, -1);
   if (n2 === "Object" && o.constructor) n2 = o.constructor.name;
   if (n2 === "Map" || n2 === "Set") return Array.from(o);
-  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$6(o, minLen);
+  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$5(o, minLen);
 }
-function _arrayLikeToArray$6(arr, len) {
+function _arrayLikeToArray$5(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
@@ -28531,27 +28813,27 @@ function _objectWithoutPropertiesLoose$9(source, excluded) {
   }
   return target;
 }
-function _toConsumableArray$3(arr) {
-  return _arrayWithoutHoles$3(arr) || _iterableToArray$3(arr) || _unsupportedIterableToArray$5(arr) || _nonIterableSpread$3();
+function _toConsumableArray$2(arr) {
+  return _arrayWithoutHoles$2(arr) || _iterableToArray$2(arr) || _unsupportedIterableToArray$4(arr) || _nonIterableSpread$2();
 }
-function _nonIterableSpread$3() {
+function _nonIterableSpread$2() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$5(o, minLen) {
+function _unsupportedIterableToArray$4(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$5(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$4(o, minLen);
   var n2 = Object.prototype.toString.call(o).slice(8, -1);
   if (n2 === "Object" && o.constructor) n2 = o.constructor.name;
   if (n2 === "Map" || n2 === "Set") return Array.from(o);
-  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$5(o, minLen);
+  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$4(o, minLen);
 }
-function _iterableToArray$3(iter) {
+function _iterableToArray$2(iter) {
   if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
-function _arrayWithoutHoles$3(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray$5(arr);
+function _arrayWithoutHoles$2(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray$4(arr);
 }
-function _arrayLikeToArray$5(arr, len) {
+function _arrayLikeToArray$4(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
@@ -28581,7 +28863,7 @@ var getSinglePolygonPath = function getSinglePolygonPath2(points, connectNulls) 
   var segmentPoints = getParsedPoints(points);
   if (connectNulls) {
     segmentPoints = [segmentPoints.reduce(function(res, segPoints) {
-      return [].concat(_toConsumableArray$3(res), _toConsumableArray$3(segPoints));
+      return [].concat(_toConsumableArray$2(res), _toConsumableArray$2(segPoints));
     }, [])];
   }
   var polygonPath = segmentPoints.map(function(segPoints) {
@@ -29434,20 +29716,20 @@ function _extends$d() {
   return _extends$d.apply(this, arguments);
 }
 function _slicedToArray$2(arr, i) {
-  return _arrayWithHoles$2(arr) || _iterableToArrayLimit$2(arr, i) || _unsupportedIterableToArray$4(arr, i) || _nonIterableRest$2();
+  return _arrayWithHoles$2(arr) || _iterableToArrayLimit$2(arr, i) || _unsupportedIterableToArray$3(arr, i) || _nonIterableRest$2();
 }
 function _nonIterableRest$2() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$4(o, minLen) {
+function _unsupportedIterableToArray$3(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$4(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$3(o, minLen);
   var n2 = Object.prototype.toString.call(o).slice(8, -1);
   if (n2 === "Object" && o.constructor) n2 = o.constructor.name;
   if (n2 === "Map" || n2 === "Set") return Array.from(o);
-  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$4(o, minLen);
+  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$3(o, minLen);
 }
-function _arrayLikeToArray$4(arr, len) {
+function _arrayLikeToArray$3(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
@@ -32393,20 +32675,20 @@ function _toPrimitive$b(t2, r2) {
   return String(t2);
 }
 function _slicedToArray$1(arr, i) {
-  return _arrayWithHoles$1(arr) || _iterableToArrayLimit$1(arr, i) || _unsupportedIterableToArray$3(arr, i) || _nonIterableRest$1();
+  return _arrayWithHoles$1(arr) || _iterableToArrayLimit$1(arr, i) || _unsupportedIterableToArray$2(arr, i) || _nonIterableRest$1();
 }
 function _nonIterableRest$1() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$3(o, minLen) {
+function _unsupportedIterableToArray$2(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$3(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$2(o, minLen);
   var n2 = Object.prototype.toString.call(o).slice(8, -1);
   if (n2 === "Object" && o.constructor) n2 = o.constructor.name;
   if (n2 === "Map" || n2 === "Set") return Array.from(o);
-  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$3(o, minLen);
+  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$2(o, minLen);
 }
-function _arrayLikeToArray$3(arr, len) {
+function _arrayLikeToArray$2(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
@@ -34078,7 +34360,8 @@ function CartesianGrid(props) {
   })));
 }
 CartesianGrid.displayName = "CartesianGrid";
-var _excluded$1 = ["type", "layout", "connectNulls", "ref"], _excluded2$1 = ["key"];
+var _excluded$1 = ["layout", "type", "stroke", "connectNulls", "isRange", "ref"], _excluded2$1 = ["key"];
+var _Area;
 function _typeof$5(o) {
   "@babel/helpers - typeof";
   return _typeof$5 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
@@ -34147,31 +34430,6 @@ function _objectSpread$2(e3) {
     });
   }
   return e3;
-}
-function _toConsumableArray$2(arr) {
-  return _arrayWithoutHoles$2(arr) || _iterableToArray$2(arr) || _unsupportedIterableToArray$2(arr) || _nonIterableSpread$2();
-}
-function _nonIterableSpread$2() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-function _unsupportedIterableToArray$2(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$2(o, minLen);
-  var n2 = Object.prototype.toString.call(o).slice(8, -1);
-  if (n2 === "Object" && o.constructor) n2 = o.constructor.name;
-  if (n2 === "Map" || n2 === "Set") return Array.from(o);
-  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray$2(o, minLen);
-}
-function _iterableToArray$2(iter) {
-  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
-}
-function _arrayWithoutHoles$2(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray$2(arr);
-}
-function _arrayLikeToArray$2(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-  return arr2;
 }
 function _classCallCheck$4(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -34264,192 +34522,173 @@ function _toPrimitive$5(t2, r2) {
   }
   return String(t2);
 }
-var Line = /* @__PURE__ */ function(_PureComponent) {
-  function Line2() {
+var Area = /* @__PURE__ */ function(_PureComponent) {
+  function Area2() {
     var _this;
-    _classCallCheck$4(this, Line2);
+    _classCallCheck$4(this, Area2);
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
-    _this = _callSuper$3(this, Line2, [].concat(args));
+    _this = _callSuper$3(this, Area2, [].concat(args));
     _defineProperty$5(_this, "state", {
-      isAnimationFinished: true,
-      totalLength: 0
+      isAnimationFinished: true
     });
-    _defineProperty$5(_this, "generateSimpleStrokeDasharray", function(totalLength, length) {
-      return "".concat(length, "px ").concat(totalLength - length, "px");
-    });
-    _defineProperty$5(_this, "getStrokeDasharray", function(length, totalLength, lines) {
-      var lineLength = lines.reduce(function(pre, next) {
-        return pre + next;
-      });
-      if (!lineLength) {
-        return _this.generateSimpleStrokeDasharray(totalLength, length);
-      }
-      var count = Math.floor(length / lineLength);
-      var remainLength = length % lineLength;
-      var restLength = totalLength - length;
-      var remainLines = [];
-      for (var i = 0, sum = 0; i < lines.length; sum += lines[i], ++i) {
-        if (sum + lines[i] > remainLength) {
-          remainLines = [].concat(_toConsumableArray$2(lines.slice(0, i)), [remainLength - sum]);
-          break;
-        }
-      }
-      var emptyLines = remainLines.length % 2 === 0 ? [0, restLength] : [restLength];
-      return [].concat(_toConsumableArray$2(Line2.repeat(lines, count)), _toConsumableArray$2(remainLines), emptyLines).map(function(line) {
-        return "".concat(line, "px");
-      }).join(", ");
-    });
-    _defineProperty$5(_this, "id", uniqueId("recharts-line-"));
-    _defineProperty$5(_this, "pathRef", function(node) {
-      _this.mainCurve = node;
-    });
+    _defineProperty$5(_this, "id", uniqueId("recharts-area-"));
     _defineProperty$5(_this, "handleAnimationEnd", function() {
+      var onAnimationEnd2 = _this.props.onAnimationEnd;
       _this.setState({
         isAnimationFinished: true
       });
-      if (_this.props.onAnimationEnd) {
-        _this.props.onAnimationEnd();
+      if (isFunction$3(onAnimationEnd2)) {
+        onAnimationEnd2();
       }
     });
     _defineProperty$5(_this, "handleAnimationStart", function() {
+      var onAnimationStart2 = _this.props.onAnimationStart;
       _this.setState({
         isAnimationFinished: false
       });
-      if (_this.props.onAnimationStart) {
-        _this.props.onAnimationStart();
+      if (isFunction$3(onAnimationStart2)) {
+        onAnimationStart2();
       }
     });
     return _this;
   }
-  _inherits$3(Line2, _PureComponent);
-  return _createClass$4(Line2, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      if (!this.props.isAnimationActive) {
-        return;
-      }
-      var totalLength = this.getTotalLength();
-      this.setState({
-        totalLength
-      });
-    }
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      if (!this.props.isAnimationActive) {
-        return;
-      }
-      var totalLength = this.getTotalLength();
-      if (totalLength !== this.state.totalLength) {
-        this.setState({
-          totalLength
-        });
-      }
-    }
-  }, {
-    key: "getTotalLength",
-    value: function getTotalLength() {
-      var curveDom = this.mainCurve;
-      try {
-        return curveDom && curveDom.getTotalLength && curveDom.getTotalLength() || 0;
-      } catch (err) {
-        return 0;
-      }
-    }
-  }, {
-    key: "renderErrorBar",
-    value: function renderErrorBar(needClip, clipPathId) {
-      if (this.props.isAnimationActive && !this.state.isAnimationFinished) {
-        return null;
-      }
-      var _this$props = this.props, points = _this$props.points, xAxis = _this$props.xAxis, yAxis = _this$props.yAxis, layout2 = _this$props.layout, children = _this$props.children;
-      var errorBarItems = findAllByType(children, ErrorBar);
-      if (!errorBarItems) {
-        return null;
-      }
-      var dataPointFormatter = function dataPointFormatter2(dataPoint, dataKey) {
-        return {
-          x: dataPoint.x,
-          y: dataPoint.y,
-          value: dataPoint.value,
-          errorVal: getValueByDataKey(dataPoint.payload, dataKey)
-        };
-      };
-      var errorBarProps = {
-        clipPath: needClip ? "url(#clipPath-".concat(clipPathId, ")") : null
-      };
-      return /* @__PURE__ */ React.createElement(Layer, errorBarProps, errorBarItems.map(function(item) {
-        return /* @__PURE__ */ React.cloneElement(item, {
-          key: "bar-".concat(item.props.dataKey),
-          data: points,
-          xAxis,
-          yAxis,
-          layout: layout2,
-          dataPointFormatter
-        });
-      }));
-    }
-  }, {
+  _inherits$3(Area2, _PureComponent);
+  return _createClass$4(Area2, [{
     key: "renderDots",
     value: function renderDots(needClip, clipDot, clipPathId) {
       var isAnimationActive = this.props.isAnimationActive;
-      if (isAnimationActive && !this.state.isAnimationFinished) {
+      var isAnimationFinished = this.state.isAnimationFinished;
+      if (isAnimationActive && !isAnimationFinished) {
         return null;
       }
-      var _this$props2 = this.props, dot = _this$props2.dot, points = _this$props2.points, dataKey = _this$props2.dataKey;
-      var lineProps = filterProps(this.props, false);
+      var _this$props = this.props, dot = _this$props.dot, points = _this$props.points, dataKey = _this$props.dataKey;
+      var areaProps = filterProps(this.props, false);
       var customDotProps = filterProps(dot, true);
       var dots = points.map(function(entry, i) {
         var dotProps = _objectSpread$2(_objectSpread$2(_objectSpread$2({
           key: "dot-".concat(i),
           r: 3
-        }, lineProps), customDotProps), {}, {
+        }, areaProps), customDotProps), {}, {
           index: i,
           cx: entry.x,
           cy: entry.y,
-          value: entry.value,
           dataKey,
+          value: entry.value,
           payload: entry.payload,
           points
         });
-        return Line2.renderDotItem(dot, dotProps);
+        return Area2.renderDotItem(dot, dotProps);
       });
       var dotsProps = {
         clipPath: needClip ? "url(#clipPath-".concat(clipDot ? "" : "dots-").concat(clipPathId, ")") : null
       };
       return /* @__PURE__ */ React.createElement(Layer, _extends$3({
-        className: "recharts-line-dots",
-        key: "dots"
+        className: "recharts-area-dots"
       }, dotsProps), dots);
     }
   }, {
-    key: "renderCurveStatically",
-    value: function renderCurveStatically(points, needClip, clipPathId, props) {
-      var _this$props3 = this.props, type = _this$props3.type, layout2 = _this$props3.layout, connectNulls = _this$props3.connectNulls;
-      _this$props3.ref;
-      var others = _objectWithoutProperties$1(_this$props3, _excluded$1);
-      var curveProps = _objectSpread$2(_objectSpread$2(_objectSpread$2({}, filterProps(others, true)), {}, {
-        fill: "none",
-        className: "recharts-line-curve",
-        clipPath: needClip ? "url(#clipPath-".concat(clipPathId, ")") : null,
-        points
-      }, props), {}, {
-        type,
-        layout: layout2,
-        connectNulls
-      });
-      return /* @__PURE__ */ React.createElement(Curve, _extends$3({}, curveProps, {
-        pathRef: this.pathRef
+    key: "renderHorizontalRect",
+    value: function renderHorizontalRect(alpha3) {
+      var _this$props2 = this.props, baseLine = _this$props2.baseLine, points = _this$props2.points, strokeWidth = _this$props2.strokeWidth;
+      var startX = points[0].x;
+      var endX = points[points.length - 1].x;
+      var width = alpha3 * Math.abs(startX - endX);
+      var maxY = max$1(points.map(function(entry) {
+        return entry.y || 0;
       }));
+      if (isNumber(baseLine) && typeof baseLine === "number") {
+        maxY = Math.max(baseLine, maxY);
+      } else if (baseLine && Array.isArray(baseLine) && baseLine.length) {
+        maxY = Math.max(max$1(baseLine.map(function(entry) {
+          return entry.y || 0;
+        })), maxY);
+      }
+      if (isNumber(maxY)) {
+        return /* @__PURE__ */ React.createElement("rect", {
+          x: startX < endX ? startX : startX - width,
+          y: 0,
+          width,
+          height: Math.floor(maxY + (strokeWidth ? parseInt("".concat(strokeWidth), 10) : 1))
+        });
+      }
+      return null;
     }
   }, {
-    key: "renderCurveWithAnimation",
-    value: function renderCurveWithAnimation(needClip, clipPathId) {
+    key: "renderVerticalRect",
+    value: function renderVerticalRect(alpha3) {
+      var _this$props3 = this.props, baseLine = _this$props3.baseLine, points = _this$props3.points, strokeWidth = _this$props3.strokeWidth;
+      var startY = points[0].y;
+      var endY = points[points.length - 1].y;
+      var height = alpha3 * Math.abs(startY - endY);
+      var maxX = max$1(points.map(function(entry) {
+        return entry.x || 0;
+      }));
+      if (isNumber(baseLine) && typeof baseLine === "number") {
+        maxX = Math.max(baseLine, maxX);
+      } else if (baseLine && Array.isArray(baseLine) && baseLine.length) {
+        maxX = Math.max(max$1(baseLine.map(function(entry) {
+          return entry.x || 0;
+        })), maxX);
+      }
+      if (isNumber(maxX)) {
+        return /* @__PURE__ */ React.createElement("rect", {
+          x: 0,
+          y: startY < endY ? startY : startY - height,
+          width: maxX + (strokeWidth ? parseInt("".concat(strokeWidth), 10) : 1),
+          height: Math.floor(height)
+        });
+      }
+      return null;
+    }
+  }, {
+    key: "renderClipRect",
+    value: function renderClipRect(alpha3) {
+      var layout2 = this.props.layout;
+      if (layout2 === "vertical") {
+        return this.renderVerticalRect(alpha3);
+      }
+      return this.renderHorizontalRect(alpha3);
+    }
+  }, {
+    key: "renderAreaStatically",
+    value: function renderAreaStatically(points, baseLine, needClip, clipPathId) {
+      var _this$props4 = this.props, layout2 = _this$props4.layout, type = _this$props4.type, stroke = _this$props4.stroke, connectNulls = _this$props4.connectNulls, isRange = _this$props4.isRange;
+      _this$props4.ref;
+      var others = _objectWithoutProperties$1(_this$props4, _excluded$1);
+      return /* @__PURE__ */ React.createElement(Layer, {
+        clipPath: needClip ? "url(#clipPath-".concat(clipPathId, ")") : null
+      }, /* @__PURE__ */ React.createElement(Curve, _extends$3({}, filterProps(others, true), {
+        points,
+        connectNulls,
+        type,
+        baseLine,
+        layout: layout2,
+        stroke: "none",
+        className: "recharts-area-area"
+      })), stroke !== "none" && /* @__PURE__ */ React.createElement(Curve, _extends$3({}, filterProps(this.props, false), {
+        className: "recharts-area-curve",
+        layout: layout2,
+        type,
+        connectNulls,
+        fill: "none",
+        points
+      })), stroke !== "none" && isRange && /* @__PURE__ */ React.createElement(Curve, _extends$3({}, filterProps(this.props, false), {
+        className: "recharts-area-curve",
+        layout: layout2,
+        type,
+        connectNulls,
+        fill: "none",
+        points: baseLine
+      })));
+    }
+  }, {
+    key: "renderAreaWithAnimation",
+    value: function renderAreaWithAnimation(needClip, clipPathId) {
       var _this2 = this;
-      var _this$props4 = this.props, points = _this$props4.points, strokeDasharray = _this$props4.strokeDasharray, isAnimationActive = _this$props4.isAnimationActive, animationBegin = _this$props4.animationBegin, animationDuration = _this$props4.animationDuration, animationEasing = _this$props4.animationEasing, animationId = _this$props4.animationId, animateNewValues = _this$props4.animateNewValues, width = _this$props4.width, height = _this$props4.height;
-      var _this$state = this.state, prevPoints = _this$state.prevPoints, totalLength = _this$state.totalLength;
+      var _this$props5 = this.props, points = _this$props5.points, baseLine = _this$props5.baseLine, isAnimationActive = _this$props5.isAnimationActive, animationBegin = _this$props5.animationBegin, animationDuration = _this$props5.animationDuration, animationEasing = _this$props5.animationEasing, animationId = _this$props5.animationId;
+      var _this$state = this.state, prevPoints = _this$state.prevPoints, prevBaseLine = _this$state.prevBaseLine;
       return /* @__PURE__ */ React.createElement(Animate, {
         begin: animationBegin,
         duration: animationDuration,
@@ -34461,14 +34700,14 @@ var Line = /* @__PURE__ */ function(_PureComponent) {
         to: {
           t: 1
         },
-        key: "line-".concat(animationId),
+        key: "area-".concat(animationId),
         onAnimationEnd: this.handleAnimationEnd,
         onAnimationStart: this.handleAnimationStart
       }, function(_ref) {
         var t2 = _ref.t;
         if (prevPoints) {
           var prevPointsDiffFactor = prevPoints.length / points.length;
-          var stepData = points.map(function(entry, index) {
+          var stepPoints = points.map(function(entry, index) {
             var prevPointIndex = Math.floor(index * prevPointsDiffFactor);
             if (prevPoints[prevPointIndex]) {
               var prev = prevPoints[prevPointIndex];
@@ -34479,58 +34718,60 @@ var Line = /* @__PURE__ */ function(_PureComponent) {
                 y: interpolatorY(t2)
               });
             }
-            if (animateNewValues) {
-              var _interpolatorX = interpolateNumber$2(width * 2, entry.x);
-              var _interpolatorY = interpolateNumber$2(height / 2, entry.y);
-              return _objectSpread$2(_objectSpread$2({}, entry), {}, {
-                x: _interpolatorX(t2),
-                y: _interpolatorY(t2)
-              });
-            }
-            return _objectSpread$2(_objectSpread$2({}, entry), {}, {
-              x: entry.x,
-              y: entry.y
+            return entry;
+          });
+          var stepBaseLine;
+          if (isNumber(baseLine) && typeof baseLine === "number") {
+            var interpolator = interpolateNumber$2(prevBaseLine, baseLine);
+            stepBaseLine = interpolator(t2);
+          } else if (isNil$1(baseLine) || isNan(baseLine)) {
+            var _interpolator = interpolateNumber$2(prevBaseLine, 0);
+            stepBaseLine = _interpolator(t2);
+          } else {
+            stepBaseLine = baseLine.map(function(entry, index) {
+              var prevPointIndex = Math.floor(index * prevPointsDiffFactor);
+              if (prevBaseLine[prevPointIndex]) {
+                var prev = prevBaseLine[prevPointIndex];
+                var interpolatorX = interpolateNumber$2(prev.x, entry.x);
+                var interpolatorY = interpolateNumber$2(prev.y, entry.y);
+                return _objectSpread$2(_objectSpread$2({}, entry), {}, {
+                  x: interpolatorX(t2),
+                  y: interpolatorY(t2)
+                });
+              }
+              return entry;
             });
-          });
-          return _this2.renderCurveStatically(stepData, needClip, clipPathId);
+          }
+          return _this2.renderAreaStatically(stepPoints, stepBaseLine, needClip, clipPathId);
         }
-        var interpolator = interpolateNumber$2(0, totalLength);
-        var curLength = interpolator(t2);
-        var currentStrokeDasharray;
-        if (strokeDasharray) {
-          var lines = "".concat(strokeDasharray).split(/[,\s]+/gim).map(function(num) {
-            return parseFloat(num);
-          });
-          currentStrokeDasharray = _this2.getStrokeDasharray(curLength, totalLength, lines);
-        } else {
-          currentStrokeDasharray = _this2.generateSimpleStrokeDasharray(totalLength, curLength);
-        }
-        return _this2.renderCurveStatically(points, needClip, clipPathId, {
-          strokeDasharray: currentStrokeDasharray
-        });
+        return /* @__PURE__ */ React.createElement(Layer, null, /* @__PURE__ */ React.createElement("defs", null, /* @__PURE__ */ React.createElement("clipPath", {
+          id: "animationClipPath-".concat(clipPathId)
+        }, _this2.renderClipRect(t2))), /* @__PURE__ */ React.createElement(Layer, {
+          clipPath: "url(#animationClipPath-".concat(clipPathId, ")")
+        }, _this2.renderAreaStatically(points, baseLine, needClip, clipPathId)));
       });
     }
   }, {
-    key: "renderCurve",
-    value: function renderCurve(needClip, clipPathId) {
-      var _this$props5 = this.props, points = _this$props5.points, isAnimationActive = _this$props5.isAnimationActive;
-      var _this$state2 = this.state, prevPoints = _this$state2.prevPoints, totalLength = _this$state2.totalLength;
-      if (isAnimationActive && points && points.length && (!prevPoints && totalLength > 0 || !isEqual$1(prevPoints, points))) {
-        return this.renderCurveWithAnimation(needClip, clipPathId);
+    key: "renderArea",
+    value: function renderArea(needClip, clipPathId) {
+      var _this$props6 = this.props, points = _this$props6.points, baseLine = _this$props6.baseLine, isAnimationActive = _this$props6.isAnimationActive;
+      var _this$state2 = this.state, prevPoints = _this$state2.prevPoints, prevBaseLine = _this$state2.prevBaseLine, totalLength = _this$state2.totalLength;
+      if (isAnimationActive && points && points.length && (!prevPoints && totalLength > 0 || !isEqual$1(prevPoints, points) || !isEqual$1(prevBaseLine, baseLine))) {
+        return this.renderAreaWithAnimation(needClip, clipPathId);
       }
-      return this.renderCurveStatically(points, needClip, clipPathId);
+      return this.renderAreaStatically(points, baseLine, needClip, clipPathId);
     }
   }, {
     key: "render",
     value: function render() {
       var _filterProps;
-      var _this$props6 = this.props, hide = _this$props6.hide, dot = _this$props6.dot, points = _this$props6.points, className = _this$props6.className, xAxis = _this$props6.xAxis, yAxis = _this$props6.yAxis, top = _this$props6.top, left = _this$props6.left, width = _this$props6.width, height = _this$props6.height, isAnimationActive = _this$props6.isAnimationActive, id2 = _this$props6.id;
+      var _this$props7 = this.props, hide = _this$props7.hide, dot = _this$props7.dot, points = _this$props7.points, className = _this$props7.className, top = _this$props7.top, left = _this$props7.left, xAxis = _this$props7.xAxis, yAxis = _this$props7.yAxis, width = _this$props7.width, height = _this$props7.height, isAnimationActive = _this$props7.isAnimationActive, id2 = _this$props7.id;
       if (hide || !points || !points.length) {
         return null;
       }
       var isAnimationFinished = this.state.isAnimationFinished;
       var hasSinglePoint = points.length === 1;
-      var layerClass = clsx("recharts-line", className);
+      var layerClass = clsx("recharts-area", className);
       var needClipX = xAxis && xAxis.allowDataOverflow;
       var needClipY = yAxis && yAxis.allowDataOverflow;
       var needClip = needClipX || needClipY;
@@ -34557,7 +34798,7 @@ var Line = /* @__PURE__ */ function(_PureComponent) {
         y: top - dotSize / 2,
         width: width + dotSize,
         height: height + dotSize
-      }))) : null, !hasSinglePoint && this.renderCurve(needClip, clipPathId), this.renderErrorBar(needClip, clipPathId), (hasSinglePoint || dot) && this.renderDots(needClip, clipDot, clipPathId), (!isAnimationActive || isAnimationFinished) && LabelList.renderCallByParent(this.props, points));
+      }))) : null, !hasSinglePoint ? this.renderArea(needClip, clipPathId) : null, (dot || hasSinglePoint) && this.renderDots(needClip, clipDot, clipPathId), (!isAnimationActive || isAnimationFinished) && LabelList.renderCallByParent(this.props, points));
     }
   }], [{
     key: "getDerivedStateFromProps",
@@ -34566,73 +34807,90 @@ var Line = /* @__PURE__ */ function(_PureComponent) {
         return {
           prevAnimationId: nextProps.animationId,
           curPoints: nextProps.points,
-          prevPoints: prevState.curPoints
+          curBaseLine: nextProps.baseLine,
+          prevPoints: prevState.curPoints,
+          prevBaseLine: prevState.curBaseLine
         };
       }
-      if (nextProps.points !== prevState.curPoints) {
+      if (nextProps.points !== prevState.curPoints || nextProps.baseLine !== prevState.curBaseLine) {
         return {
-          curPoints: nextProps.points
+          curPoints: nextProps.points,
+          curBaseLine: nextProps.baseLine
         };
       }
       return null;
     }
-  }, {
-    key: "repeat",
-    value: function repeat(lines, count) {
-      var linesUnit = lines.length % 2 !== 0 ? [].concat(_toConsumableArray$2(lines), [0]) : lines;
-      var result = [];
-      for (var i = 0; i < count; ++i) {
-        result = [].concat(_toConsumableArray$2(result), _toConsumableArray$2(linesUnit));
-      }
-      return result;
-    }
-  }, {
-    key: "renderDotItem",
-    value: function renderDotItem(option, props) {
-      var dotItem;
-      if (/* @__PURE__ */ React.isValidElement(option)) {
-        dotItem = /* @__PURE__ */ React.cloneElement(option, props);
-      } else if (isFunction$3(option)) {
-        dotItem = option(props);
-      } else {
-        var key = props.key, dotProps = _objectWithoutProperties$1(props, _excluded2$1);
-        var className = clsx("recharts-line-dot", typeof option !== "boolean" ? option.className : "");
-        dotItem = /* @__PURE__ */ React.createElement(Dot, _extends$3({
-          key
-        }, dotProps, {
-          className
-        }));
-      }
-      return dotItem;
-    }
   }]);
 }(reactExports.PureComponent);
-_defineProperty$5(Line, "displayName", "Line");
-_defineProperty$5(Line, "defaultProps", {
+_Area = Area;
+_defineProperty$5(Area, "displayName", "Area");
+_defineProperty$5(Area, "defaultProps", {
+  stroke: "#3182bd",
+  fill: "#3182bd",
+  fillOpacity: 0.6,
   xAxisId: 0,
   yAxisId: 0,
-  connectNulls: false,
-  activeDot: true,
-  dot: true,
   legendType: "line",
-  stroke: "#3182bd",
-  strokeWidth: 1,
-  fill: "#fff",
+  connectNulls: false,
+  // points of area
   points: [],
+  dot: false,
+  activeDot: true,
+  hide: false,
   isAnimationActive: !Global.isSsr,
-  animateNewValues: true,
   animationBegin: 0,
   animationDuration: 1500,
-  animationEasing: "ease",
-  hide: false,
-  label: false
+  animationEasing: "ease"
 });
-_defineProperty$5(Line, "getComposedData", function(_ref4) {
-  var props = _ref4.props, xAxis = _ref4.xAxis, yAxis = _ref4.yAxis, xAxisTicks = _ref4.xAxisTicks, yAxisTicks = _ref4.yAxisTicks, dataKey = _ref4.dataKey, bandSize = _ref4.bandSize, displayedData = _ref4.displayedData, offset = _ref4.offset;
+_defineProperty$5(Area, "getBaseValue", function(props, item, xAxis, yAxis) {
+  var layout2 = props.layout, chartBaseValue = props.baseValue;
+  var itemBaseValue = item.props.baseValue;
+  var baseValue = itemBaseValue !== null && itemBaseValue !== void 0 ? itemBaseValue : chartBaseValue;
+  if (isNumber(baseValue) && typeof baseValue === "number") {
+    return baseValue;
+  }
+  var numericAxis = layout2 === "horizontal" ? yAxis : xAxis;
+  var domain = numericAxis.scale.domain();
+  if (numericAxis.type === "number") {
+    var domainMax = Math.max(domain[0], domain[1]);
+    var domainMin = Math.min(domain[0], domain[1]);
+    if (baseValue === "dataMin") {
+      return domainMin;
+    }
+    if (baseValue === "dataMax") {
+      return domainMax;
+    }
+    return domainMax < 0 ? domainMax : Math.max(Math.min(domain[0], domain[1]), 0);
+  }
+  if (baseValue === "dataMin") {
+    return domain[0];
+  }
+  if (baseValue === "dataMax") {
+    return domain[1];
+  }
+  return domain[0];
+});
+_defineProperty$5(Area, "getComposedData", function(_ref4) {
+  var props = _ref4.props, item = _ref4.item, xAxis = _ref4.xAxis, yAxis = _ref4.yAxis, xAxisTicks = _ref4.xAxisTicks, yAxisTicks = _ref4.yAxisTicks, bandSize = _ref4.bandSize, dataKey = _ref4.dataKey, stackedData = _ref4.stackedData, dataStartIndex = _ref4.dataStartIndex, displayedData = _ref4.displayedData, offset = _ref4.offset;
   var layout2 = props.layout;
+  var hasStack = stackedData && stackedData.length;
+  var baseValue = _Area.getBaseValue(props, item, xAxis, yAxis);
+  var isHorizontalLayout = layout2 === "horizontal";
+  var isRange = false;
   var points = displayedData.map(function(entry, index) {
-    var value = getValueByDataKey(entry, dataKey);
-    if (layout2 === "horizontal") {
+    var value;
+    if (hasStack) {
+      value = stackedData[dataStartIndex + index];
+    } else {
+      value = getValueByDataKey(entry, dataKey);
+      if (!Array.isArray(value)) {
+        value = [baseValue, value];
+      } else {
+        isRange = true;
+      }
+    }
+    var isBreakPoint = value[1] == null || hasStack && getValueByDataKey(entry, dataKey) == null;
+    if (isHorizontalLayout) {
       return {
         x: getCateCoordinateOfLine({
           axis: xAxis,
@@ -34641,13 +34899,13 @@ _defineProperty$5(Line, "getComposedData", function(_ref4) {
           entry,
           index
         }),
-        y: isNil$1(value) ? null : yAxis.scale(value),
+        y: isBreakPoint ? null : yAxis.scale(value[1]),
         value,
         payload: entry
       };
     }
     return {
-      x: isNil$1(value) ? null : xAxis.scale(value),
+      x: isBreakPoint ? null : xAxis.scale(value[1]),
       y: getCateCoordinateOfLine({
         axis: yAxis,
         ticks: yAxisTicks,
@@ -34659,10 +34917,46 @@ _defineProperty$5(Line, "getComposedData", function(_ref4) {
       payload: entry
     };
   });
+  var baseLine;
+  if (hasStack || isRange) {
+    baseLine = points.map(function(entry) {
+      var x2 = Array.isArray(entry.value) ? entry.value[0] : null;
+      if (isHorizontalLayout) {
+        return {
+          x: entry.x,
+          y: x2 != null && entry.y != null ? yAxis.scale(x2) : null
+        };
+      }
+      return {
+        x: x2 != null ? xAxis.scale(x2) : null,
+        y: entry.y
+      };
+    });
+  } else {
+    baseLine = isHorizontalLayout ? yAxis.scale(baseValue) : xAxis.scale(baseValue);
+  }
   return _objectSpread$2({
     points,
-    layout: layout2
+    baseLine,
+    layout: layout2,
+    isRange
   }, offset);
+});
+_defineProperty$5(Area, "renderDotItem", function(option, props) {
+  var dotItem;
+  if (/* @__PURE__ */ React.isValidElement(option)) {
+    dotItem = /* @__PURE__ */ React.cloneElement(option, props);
+  } else if (isFunction$3(option)) {
+    dotItem = option(props);
+  } else {
+    var className = clsx("recharts-area-dot", typeof option !== "boolean" ? option.className : "");
+    var key = props.key, rest = _objectWithoutProperties$1(props, _excluded2$1);
+    dotItem = /* @__PURE__ */ React.createElement(Dot, _extends$3({}, rest, {
+      key,
+      className
+    }));
+  }
+  return dotItem;
 });
 function _typeof$4(o) {
   "@babel/helpers - typeof";
@@ -34929,7 +35223,7 @@ function _toPrimitive$3(t2, r2) {
     if ("object" != _typeof$3(i)) return i;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
-  return String(t2);
+  return ("string" === r2 ? String : Number)(t2);
 }
 function _extends$1() {
   _extends$1 = Object.assign ? Object.assign.bind() : function(target) {
@@ -37336,18 +37630,6 @@ var generateCategoricalChart = function generateCategoricalChart2(_ref6) {
   CategoricalChart.displayName = CategoricalChartWrapper.displayName;
   return CategoricalChart;
 };
-var LineChart = generateCategoricalChart({
-  chartName: "LineChart",
-  GraphicalChild: Line,
-  axisComponents: [{
-    axisType: "xAxis",
-    AxisComp: XAxis
-  }, {
-    axisType: "yAxis",
-    AxisComp: YAxis
-  }],
-  formatAxisMap: formatAxisMap2
-});
 var PieChart = generateCategoricalChart({
   chartName: "PieChart",
   GraphicalChild: Pie,
@@ -37372,371 +37654,562 @@ var PieChart = generateCategoricalChart({
     outerRadius: "80%"
   }
 });
+var AreaChart = generateCategoricalChart({
+  chartName: "AreaChart",
+  GraphicalChild: Area,
+  axisComponents: [{
+    axisType: "xAxis",
+    AxisComp: XAxis
+  }, {
+    axisType: "yAxis",
+    AxisComp: YAxis
+  }],
+  formatAxisMap: formatAxisMap2
+});
+const round2 = (value) => Math.round(value * 100) / 100;
+const calculateNomina = (salary) => {
+  const safeSalary = Number.isFinite(salary) && salary > 0 ? salary : 0;
+  const afp = safeSalary * 0.0287;
+  const sfs = safeSalary * 0.0304;
+  const taxable = Math.max(safeSalary - afp - sfs, 0);
+  const annualTaxable = taxable * 12;
+  let annualIsr = 0;
+  if (annualTaxable > 867123) {
+    annualIsr = 79776 + (annualTaxable - 867123) * 0.25;
+  } else if (annualTaxable > 624329) {
+    annualIsr = 31216 + (annualTaxable - 624329) * 0.2;
+  } else if (annualTaxable > 416220) {
+    annualIsr = (annualTaxable - 416220) * 0.15;
+  }
+  const isr = annualIsr / 12;
+  const totalDeductions = afp + sfs + isr;
+  const netSalary = safeSalary - totalDeductions;
+  return {
+    salary: round2(safeSalary),
+    afp: round2(afp),
+    sfs: round2(sfs),
+    taxable: round2(taxable),
+    isr: round2(isr),
+    totalDeductions: round2(totalDeductions),
+    netSalary: round2(netSalary)
+  };
+};
 const formatRD = (amount) => new Intl.NumberFormat("es-DO", {
   style: "currency",
   currency: "DOP",
   minimumFractionDigits: 2,
   maximumFractionDigits: 2
 }).format(amount);
-const toneClass = {
-  default: "text-slate-100",
-  success: "text-emerald-300",
-  danger: "text-rose-300"
+const monthName = (value) => (/* @__PURE__ */ new Date(`${value}-01T00:00:00`)).toLocaleDateString("es-DO", { month: "short", year: "numeric" });
+const relativeDate = (iso) => {
+  const current = /* @__PURE__ */ new Date();
+  const source = new Date(iso);
+  const diffDays = Math.floor((current.getTime() - source.getTime()) / (1e3 * 60 * 60 * 24));
+  if (diffDays <= 0) return "hoy";
+  if (diffDays === 1) return "ayer";
+  return `hace ${diffDays}d`;
 };
-const StatCard = ({ label, value, tone = "default" }) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "card p-5 shadow-glow", children: [
-  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs uppercase tracking-[0.15em] text-slate-400", children: label }),
-  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: `mt-3 text-2xl font-semibold ${toneClass[tone]}`, children: value })
-] });
-const COLORS = ["#818cf8", "#38bdf8", "#34d399", "#f59e0b", "#fb7185", "#a78bfa", "#22d3ee"];
-const Dashboard = ({ finance }) => {
-  const { stats } = finance;
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "space-y-6", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-3 gap-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(StatCard, { label: "Ingresos", value: formatRD(stats.totalIncome), tone: "success" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(StatCard, { label: "Gastos", value: formatRD(stats.totalExpense), tone: "danger" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(StatCard, { label: "Balance", value: formatRD(stats.balance), tone: stats.balance >= 0 ? "success" : "danger" })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "card h-80 p-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mb-3 text-sm font-semibold text-slate-200", children: "Flujo mensual" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(ResponsiveContainer, { width: "100%", height: "88%", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(LineChart, { data: stats.monthly, children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CartesianGrid, { strokeDasharray: "3 3", stroke: "#334155" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(XAxis, { dataKey: "month", stroke: "#94a3b8" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(YAxis, { stroke: "#94a3b8", tickFormatter: (v2) => new Intl.NumberFormat("es-DO").format(v2) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltip, { formatter: (value) => formatRD(value) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Legend, {}),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Line, { dataKey: "income", name: "Ingresos", stroke: "#34d399", strokeWidth: 2 }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Line, { dataKey: "expense", name: "Gastos", stroke: "#fb7185", strokeWidth: 2 })
-        ] }) })
+const Dashboard = ({ finance, payroll }) => {
+  const { stats, transactions } = finance;
+  const savingRate = stats.totalIncome > 0 ? (stats.totalIncome - stats.totalExpense) / stats.totalIncome * 100 : 0;
+  const latestMonth = stats.monthly.at(-1)?.month ?? (/* @__PURE__ */ new Date()).toISOString().slice(0, 7);
+  const recent = transactions.slice(0, 5);
+  const expensesOnly = stats.categoryBreakdown.filter((c2) => c2.type === "expense");
+  const expenseTotal = expensesOnly.reduce((acc, item) => acc + item.total, 0);
+  const pieColors = ["#ff4560", "#7c3aed", "#ffb830", "#b5ff4d", "#5b21b6", "#c084fc"];
+  const recentPayrolls = payroll.payrollRecords.slice(0, 3);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "space-y-4", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-12 gap-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { className: "surface-card card-hover col-span-6 bg-[linear-gradient(130deg,#0f0f1a_0%,#161625_100%)] p-6", initial: { opacity: 0, y: 16 }, animate: { opacity: 1, y: 0 }, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-3 flex items-center justify-between", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] uppercase tracking-[2px] text-[var(--text-muted)]", children: "BALANCE NETO" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "rounded-full bg-[var(--bg-elevated)] px-2 py-1 text-xs text-[var(--text-secondary)]", children: monthName(latestMonth) })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "amount text-4xl font-medium text-[var(--accent)]", style: stats.balance > 0 ? { textShadow: "0 0 20px var(--accent-glow)" } : void 0, children: formatRD(stats.balance) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-xs text-[var(--text-secondary)]", children: "Tu balance actual en este mes." })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "card h-80 p-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mb-3 text-sm font-semibold text-slate-200", children: "Distribución por categoría" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(ResponsiveContainer, { width: "100%", height: "88%", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(PieChart, { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Pie, { data: stats.categoryBreakdown, dataKey: "total", nameKey: "category", outerRadius: 95, children: stats.categoryBreakdown.map((entry, index) => /* @__PURE__ */ jsxRuntimeExports.jsx(Cell, { fill: COLORS[index % COLORS.length] }, `cell-${entry.category}`)) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltip, { formatter: (value) => formatRD(value) })
-        ] }) })
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "surface-card card-hover col-span-2 rounded-xl p-5", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] uppercase tracking-[1.5px] text-[var(--text-muted)]", children: "INGRESOS" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "amount mt-3 text-2xl text-[var(--income)]", children: formatRD(stats.totalIncome) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "surface-card card-hover col-span-2 rounded-xl p-5", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] uppercase tracking-[1.5px] text-[var(--text-muted)]", children: "GASTOS" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "amount mt-3 text-2xl text-[var(--expense)]", children: formatRD(stats.totalExpense) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "surface-card card-hover col-span-2 rounded-xl p-5", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] uppercase tracking-[1.5px] text-[var(--text-muted)]", children: "TASA AHORRO" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "amount mt-3 text-2xl text-[var(--accent)]", children: [
+          savingRate.toFixed(1),
+          "%"
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-3 h-1 w-full rounded-full bg-white/10", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-1 rounded-full bg-[var(--accent)]", style: { width: `${Math.max(0, Math.min(100, savingRate))}%` } }) })
       ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "surface-card card-hover h-[280px] p-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-3 text-sm text-[var(--text-secondary)]", children: "Flujo últimos meses" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(ResponsiveContainer, { width: "100%", height: "88%", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(AreaChart, { data: stats.monthly, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("defs", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("linearGradient", { id: "incomeGrad", x1: "0", y1: "0", x2: "0", y2: "1", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("stop", { offset: "5%", stopColor: "#b5ff4d", stopOpacity: 0.3 }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("stop", { offset: "95%", stopColor: "#b5ff4d", stopOpacity: 0 })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("linearGradient", { id: "expenseGrad", x1: "0", y1: "0", x2: "0", y2: "1", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("stop", { offset: "5%", stopColor: "#ff4560", stopOpacity: 0.3 }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("stop", { offset: "95%", stopColor: "#ff4560", stopOpacity: 0 })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Area, { type: "monotone", dataKey: "income", stroke: "#b5ff4d", strokeWidth: 2, fill: "url(#incomeGrad)", dot: false, activeDot: { r: 4, fill: "#b5ff4d" } }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Area, { type: "monotone", dataKey: "expense", stroke: "#ff4560", strokeWidth: 2, fill: "url(#expenseGrad)", dot: false, activeDot: { r: 4, fill: "#ff4560" } }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(XAxis, { dataKey: "month", tick: { fill: "#8888aa", fontSize: 11 }, axisLine: false, tickLine: false, tickFormatter: monthName }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltip, { contentStyle: { background: "#161625", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 10 }, formatter: (v2) => formatRD(v2) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CartesianGrid, { vertical: false, stroke: "rgba(255,255,255,0.04)" })
+      ] }) })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "surface-card card-hover p-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-2 text-sm text-[var(--text-secondary)]", children: "Distribución gastos" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative h-[240px]", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(ResponsiveContainer, { width: "100%", height: "100%", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(PieChart, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Pie, { data: expensesOnly, dataKey: "total", nameKey: "category", innerRadius: 58, outerRadius: 86, paddingAngle: 3, children: expensesOnly.map((entry, index) => /* @__PURE__ */ jsxRuntimeExports.jsx(Cell, { fill: pieColors[index % pieColors.length] }, `${entry.category}-${entry.type}`)) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltip, { formatter: (value) => formatRD(value) })
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "pointer-events-none absolute inset-0 grid place-items-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-[var(--text-secondary)]", children: "Gastos" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "amount text-lg text-[var(--expense)]", children: formatRD(expenseTotal) })
+          ] }) })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "surface-card card-hover p-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-2 text-sm text-[var(--text-secondary)]", children: "Actividad reciente" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-1", children: recent.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid h-[220px] place-items-center text-center text-[var(--text-secondary)]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { width: "120", height: "64", viewBox: "0 0 120 64", fill: "none", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M4 48H30L44 36L58 42L78 22L94 30L116 14", stroke: "currentColor", strokeWidth: "2" }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm", children: "Aún no hay datos" })
+        ] }) }) : recent.map((tx) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "group flex items-center justify-between border-b border-[var(--border)] px-2 py-2 transition hover:bg-white/5", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-[var(--text-primary)]", children: tx.title }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-[var(--text-muted)]", children: [
+              tx.categoryName,
+              " · ",
+              relativeDate(tx.createdAt)
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: `amount text-sm ${tx.type === "income" ? "text-[var(--income)]" : "text-[var(--expense)]"}`, children: [
+            tx.type === "income" ? "+" : "-",
+            formatRD(tx.amount)
+          ] })
+        ] }, tx.id)) })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "surface-card card-hover p-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-3 flex items-center gap-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FileText, { size: 15, className: "text-[var(--accent)]" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-[var(--text-secondary)]", children: "Últimas nóminas enviadas" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "ml-auto rounded-full bg-[var(--bg-elevated)] px-2 py-0.5 text-xs text-[var(--text-muted)]", children: [
+          payroll.employees.length,
+          " empleado",
+          payroll.employees.length !== 1 ? "s" : ""
+        ] })
+      ] }),
+      recentPayrolls.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid h-20 place-items-center text-center text-[var(--text-secondary)]", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm", children: "No hay nóminas enviadas aún" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-2", children: recentPayrolls.map((record) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between rounded-[10px] border border-[var(--border)] px-3 py-2.5 transition hover:bg-white/5", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-[var(--text-primary)]", children: [
+            "Nómina ",
+            (/* @__PURE__ */ new Date(`${record.period}-01T00:00:00`)).toLocaleDateString("es-DO", { month: "long", year: "numeric" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-[var(--text-muted)]", children: [
+            record.employeeCount,
+            " empleado",
+            record.employeeCount !== 1 ? "s" : "",
+            " · ",
+            new Date(record.sentAt).toLocaleDateString("es-DO")
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-right", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "amount text-sm font-semibold text-[var(--income)]", children: formatRD(record.totalNet) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-[var(--text-muted)]", children: "neto" })
+        ] })
+      ] }, record.id)) })
     ] })
   ] });
 };
-const Nomina = ({ finance: _finance }) => {
-  const [salary, setSalary] = reactExports.useState(25e3);
-  const [calculated, setCalculated] = reactExports.useState(null);
-  const calculate = async () => {
-    const res = await window.api.nomina.calculate(Number(salary));
-    setCalculated(res);
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "grid grid-cols-[360px_1fr] gap-4", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "card space-y-4 p-5", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold", children: "Calculadora de Nómina RD" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "block text-sm", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mb-1 block text-slate-300", children: "Sueldo bruto mensual" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "input",
-          {
-            type: "number",
-            min: "0",
-            value: salary,
-            onChange: (e3) => setSalary(Number(e3.target.value)),
-            className: "w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2"
-          }
-        )
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "rounded-lg bg-brand-500 px-4 py-2 text-sm font-semibold", onClick: () => void calculate(), type: "button", children: "Calcular" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-slate-400", children: "AFP 2.87%, SFS 3.04% e ISR anual prorrateado." })
+const defaultPayload = () => ({
+  name: "",
+  occupation: "",
+  salaryBase: 0,
+  department: "",
+  phone: "",
+  email: ""
+});
+const currentPeriod = () => (/* @__PURE__ */ new Date()).toISOString().slice(0, 7);
+const Nomina = ({ payroll }) => {
+  const [tab, setTab] = reactExports.useState("employees");
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "space-y-4", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-2 border-b border-[var(--border)] pb-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(TabButton, { active: tab === "employees", onClick: () => setTab("employees"), icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Users, { size: 14 }), label: "Empleados" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(TabButton, { active: tab === "payroll", onClick: () => setTab("payroll"), icon: /* @__PURE__ */ jsxRuntimeExports.jsx(FileText, { size: 14 }), label: "Generar Nómina" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(TabButton, { active: tab === "history", onClick: () => setTab("history"), icon: /* @__PURE__ */ jsxRuntimeExports.jsx(History, { size: 14 }), label: "Historial" })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "card p-5", children: !calculated ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-400", children: "Ingresa un salario y presiona calcular." }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-4 text-sm", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Item, { label: "Sueldo bruto", value: formatRD(calculated.salary) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Item, { label: "AFP", value: formatRD(calculated.afp) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Item, { label: "SFS", value: formatRD(calculated.sfs) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Item, { label: "Base imponible", value: formatRD(calculated.taxable) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Item, { label: "ISR mensual", value: formatRD(calculated.isr) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Item, { label: "Descuentos totales", value: formatRD(calculated.totalDeductions) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Item, { label: "Sueldo neto", value: formatRD(calculated.netSalary), strong: true })
+    /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { mode: "wait", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { initial: { opacity: 0, y: 8 }, animate: { opacity: 1, y: 0 }, exit: { opacity: 0, y: -8 }, transition: { duration: 0.2 }, children: [
+      tab === "employees" && /* @__PURE__ */ jsxRuntimeExports.jsx(EmployeesTab, { payroll }),
+      tab === "payroll" && /* @__PURE__ */ jsxRuntimeExports.jsx(PayrollTab, { payroll }),
+      tab === "history" && /* @__PURE__ */ jsxRuntimeExports.jsx(HistoryTab, { payroll })
+    ] }, tab) })
+  ] });
+};
+const TabButton = ({
+  active,
+  onClick,
+  icon,
+  label
+}) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+  "button",
+  {
+    type: "button",
+    onClick,
+    className: `flex items-center gap-2 rounded-[10px] px-4 py-2 text-sm transition-all duration-200 ${active ? "bg-[var(--accent-glow)] text-[var(--accent)]" : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"}`,
+    children: [
+      icon,
+      label
+    ]
+  }
+);
+const EmployeesTab = ({ payroll }) => {
+  const { employees, createEmployee, updateEmployee, deleteEmployee } = payroll;
+  const [showForm, setShowForm] = reactExports.useState(false);
+  const [editing, setEditing] = reactExports.useState(null);
+  const [form, setForm] = reactExports.useState(defaultPayload());
+  const openAdd = () => {
+    setEditing(null);
+    setForm(defaultPayload());
+    setShowForm(true);
+  };
+  const openEdit = (emp) => {
+    setEditing(emp);
+    setForm({
+      name: emp.name,
+      occupation: emp.occupation,
+      salaryBase: emp.salaryBase,
+      department: emp.department,
+      phone: emp.phone,
+      email: emp.email
+    });
+    setShowForm(true);
+  };
+  const handleSubmit = async () => {
+    if (!form.name.trim() || !form.occupation.trim() || form.salaryBase <= 0) return;
+    if (editing) {
+      await updateEmployee(editing.id, form);
+    } else {
+      await createEmployee(form);
+    }
+    setShowForm(false);
+    setForm(defaultPayload());
+    setEditing(null);
+  };
+  const handleCancel = () => {
+    setShowForm(false);
+    setForm(defaultPayload());
+    setEditing(null);
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-[var(--text-secondary)]", children: [
+        employees.length,
+        " empleado",
+        employees.length !== 1 ? "s" : "",
+        " registrado",
+        employees.length !== 1 ? "s" : ""
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { type: "button", onClick: openAdd, className: "flex items-center gap-2 rounded-[10px] bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[#080810]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 14 }),
+        "Agregar empleado"
+      ] })
+    ] }),
+    showForm && /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { initial: { opacity: 0, y: -8 }, animate: { opacity: 1, y: 0 }, className: "surface-card p-5", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-4 text-sm font-semibold text-[var(--text-primary)]", children: editing ? "Editar empleado" : "Nuevo empleado" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Nombre *", value: form.name, onChange: (v2) => setForm((f2) => ({ ...f2, name: v2 })), placeholder: "Nombre completo" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Ocupación *", value: form.occupation, onChange: (v2) => setForm((f2) => ({ ...f2, occupation: v2 })), placeholder: "Ej. Desarrollador" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Sueldo base (RD$) *", type: "number", value: String(form.salaryBase || ""), onChange: (v2) => setForm((f2) => ({ ...f2, salaryBase: Number(v2) })), placeholder: "25000" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Departamento", value: form.department ?? "", onChange: (v2) => setForm((f2) => ({ ...f2, department: v2 })), placeholder: "Ej. Tecnología" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Teléfono", value: form.phone ?? "", onChange: (v2) => setForm((f2) => ({ ...f2, phone: v2 })), placeholder: "809-000-0000" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Email", type: "email", value: form.email ?? "", onChange: (v2) => setForm((f2) => ({ ...f2, email: v2 })), placeholder: "nombre@empresa.com" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 flex gap-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { type: "button", onClick: () => void handleSubmit(), className: "flex items-center gap-2 rounded-[10px] bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[#080810]", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Check, { size: 14 }),
+          editing ? "Guardar cambios" : "Agregar"
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { type: "button", onClick: handleCancel, className: "flex items-center gap-2 rounded-[10px] border border-[var(--border)] px-4 py-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)]", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(X, { size: 14 }),
+          "Cancelar"
+        ] })
+      ] })
+    ] }),
+    employees.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "surface-card grid h-40 place-items-center text-center text-[var(--text-secondary)]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Users, { size: 40, className: "mx-auto mb-2 text-[var(--text-muted)]" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm", children: "No hay empleados registrados" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-[var(--text-muted)]", children: "Agrega el primer empleado para comenzar" })
+    ] }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "surface-card overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("table", { className: "w-full", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("thead", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { className: "border-b border-[var(--border)]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3 text-left text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]", children: "Nombre" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3 text-left text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]", children: "Ocupación" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3 text-left text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]", children: "Departamento" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3 text-right text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]", children: "Sueldo base" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3 text-center text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]", children: "Acciones" })
+      ] }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("tbody", { children: employees.map((emp, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "tr",
+        {
+          className: `border-b border-[var(--border)] transition hover:bg-white/5 ${i === employees.length - 1 ? "border-b-0" : ""}`,
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("td", { className: "px-4 py-3", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-[var(--text-primary)]", children: emp.name }),
+              emp.email && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-[var(--text-muted)]", children: emp.email })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3 text-sm text-[var(--text-secondary)]", children: emp.occupation }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3 text-sm text-[var(--text-secondary)]", children: emp.department || "—" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "amount px-4 py-3 text-right text-sm text-[var(--income)]", children: formatRD(emp.salaryBase) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-center gap-2", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("button", { type: "button", onClick: () => openEdit(emp), className: "rounded-[8px] p-1.5 text-[var(--text-muted)] transition hover:bg-white/10 hover:text-[var(--accent)]", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Pencil, { size: 13 }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("button", { type: "button", onClick: () => void deleteEmployee(emp.id), className: "rounded-[8px] p-1.5 text-[var(--text-muted)] transition hover:bg-white/10 hover:text-[var(--expense)]", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Trash2, { size: 13 }) })
+            ] }) })
+          ]
+        },
+        emp.id
+      )) })
     ] }) })
   ] });
 };
-const Item = ({ label, value, strong }) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-xl border border-slate-800 bg-slate-900/60 p-4", children: [
-  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs uppercase tracking-[0.15em] text-slate-400", children: label }),
-  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: `mt-2 ${strong ? "text-xl font-bold text-emerald-300" : "text-lg font-semibold text-slate-100"}`, children: value })
-] });
-/**
- * @license lucide-react v0.460.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const toKebabCase = (string2) => string2.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
-const mergeClasses = (...classes) => classes.filter((className, index, array2) => {
-  return Boolean(className) && className.trim() !== "" && array2.indexOf(className) === index;
-}).join(" ").trim();
-/**
- * @license lucide-react v0.460.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-var defaultAttributes = {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: 24,
-  height: 24,
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  strokeWidth: 2,
-  strokeLinecap: "round",
-  strokeLinejoin: "round"
-};
-/**
- * @license lucide-react v0.460.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const Icon = reactExports.forwardRef(
-  ({
-    color: color2 = "currentColor",
-    size = 24,
-    strokeWidth = 2,
-    absoluteStrokeWidth,
-    className = "",
-    children,
-    iconNode,
-    ...rest
-  }, ref) => {
-    return reactExports.createElement(
-      "svg",
-      {
-        ref,
-        ...defaultAttributes,
-        width: size,
-        height: size,
-        stroke: color2,
-        strokeWidth: absoluteStrokeWidth ? Number(strokeWidth) * 24 / Number(size) : strokeWidth,
-        className: mergeClasses("lucide", className),
-        ...rest
-      },
-      [
-        ...iconNode.map(([tag, attrs]) => reactExports.createElement(tag, attrs)),
-        ...Array.isArray(children) ? children : [children]
-      ]
-    );
-  }
-);
-/**
- * @license lucide-react v0.460.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const createLucideIcon = (iconName, iconNode) => {
-  const Component = reactExports.forwardRef(
-    ({ className, ...props }, ref) => reactExports.createElement(Icon, {
-      ref,
-      iconNode,
-      className: mergeClasses(`lucide-${toKebabCase(iconName)}`, className),
-      ...props
-    })
+const PayrollTab = ({ payroll }) => {
+  const { employees, sendPayroll } = payroll;
+  const [period, setPeriod] = reactExports.useState(currentPeriod);
+  const [sending, setSending] = reactExports.useState(false);
+  const [sent, setSent] = reactExports.useState(false);
+  const details = reactExports.useMemo(
+    () => employees.map((emp) => {
+      const calc = calculateNomina(emp.salaryBase);
+      return {
+        employeeId: emp.id,
+        name: emp.name,
+        occupation: emp.occupation,
+        salaryBase: emp.salaryBase,
+        afp: calc.afp,
+        sfs: calc.sfs,
+        isr: calc.isr,
+        totalDeductions: calc.totalDeductions,
+        netSalary: calc.netSalary
+      };
+    }),
+    [employees]
   );
-  Component.displayName = `${iconName}`;
-  return Component;
-};
-/**
- * @license lucide-react v0.460.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const LayoutDashboard = createLucideIcon("LayoutDashboard", [
-  ["rect", { width: "7", height: "9", x: "3", y: "3", rx: "1", key: "10lvy0" }],
-  ["rect", { width: "7", height: "5", x: "14", y: "3", rx: "1", key: "16une8" }],
-  ["rect", { width: "7", height: "9", x: "14", y: "12", rx: "1", key: "1hutg5" }],
-  ["rect", { width: "7", height: "5", x: "3", y: "16", rx: "1", key: "ldoo1y" }]
-]);
-/**
- * @license lucide-react v0.460.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const Maximize2 = createLucideIcon("Maximize2", [
-  ["polyline", { points: "15 3 21 3 21 9", key: "mznyad" }],
-  ["polyline", { points: "9 21 3 21 3 15", key: "1avn1i" }],
-  ["line", { x1: "21", x2: "14", y1: "3", y2: "10", key: "ota7mn" }],
-  ["line", { x1: "3", x2: "10", y1: "21", y2: "14", key: "1atl0r" }]
-]);
-/**
- * @license lucide-react v0.460.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const Minimize2 = createLucideIcon("Minimize2", [
-  ["polyline", { points: "4 14 10 14 10 20", key: "11kfnr" }],
-  ["polyline", { points: "20 10 14 10 14 4", key: "rlmsce" }],
-  ["line", { x1: "14", x2: "21", y1: "10", y2: "3", key: "o5lafz" }],
-  ["line", { x1: "3", x2: "10", y1: "21", y2: "14", key: "1atl0r" }]
-]);
-/**
- * @license lucide-react v0.460.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const Minus = createLucideIcon("Minus", [["path", { d: "M5 12h14", key: "1ays0h" }]]);
-/**
- * @license lucide-react v0.460.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const Pencil = createLucideIcon("Pencil", [
-  [
-    "path",
-    {
-      d: "M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z",
-      key: "1a8usu"
+  const totals = reactExports.useMemo(
+    () => ({
+      totalGross: details.reduce((sum, d2) => sum + d2.salaryBase, 0),
+      totalNet: details.reduce((sum, d2) => sum + d2.netSalary, 0),
+      totalDeductions: details.reduce((sum, d2) => sum + d2.totalDeductions, 0)
+    }),
+    [details]
+  );
+  const handleSend = async () => {
+    if (employees.length === 0) return;
+    setSending(true);
+    try {
+      await sendPayroll({ period, employeeCount: employees.length, ...totals, details });
+      setSent(true);
+      setTimeout(() => setSent(false), 3e3);
+    } finally {
+      setSending(false);
     }
-  ],
-  ["path", { d: "m15 5 4 4", key: "1mk7zo" }]
-]);
-/**
- * @license lucide-react v0.460.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const Plus = createLucideIcon("Plus", [
-  ["path", { d: "M5 12h14", key: "1ays0h" }],
-  ["path", { d: "M12 5v14", key: "s699le" }]
-]);
-/**
- * @license lucide-react v0.460.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const ReceiptText = createLucideIcon("ReceiptText", [
-  [
-    "path",
-    { d: "M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z", key: "q3az6g" }
-  ],
-  ["path", { d: "M14 8H8", key: "1l3xfs" }],
-  ["path", { d: "M16 12H8", key: "1fr5h0" }],
-  ["path", { d: "M13 16H8", key: "wsln4y" }]
-]);
-/**
- * @license lucide-react v0.460.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const Trash2 = createLucideIcon("Trash2", [
-  ["path", { d: "M3 6h18", key: "d0wm0j" }],
-  ["path", { d: "M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6", key: "4alrt4" }],
-  ["path", { d: "M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2", key: "v07s0e" }],
-  ["line", { x1: "10", x2: "10", y1: "11", y2: "17", key: "1uufr5" }],
-  ["line", { x1: "14", x2: "14", y1: "11", y2: "17", key: "xtxkd" }]
-]);
-/**
- * @license lucide-react v0.460.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const WalletCards = createLucideIcon("WalletCards", [
-  ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", key: "afitv7" }],
-  ["path", { d: "M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2", key: "4125el" }],
-  [
-    "path",
-    {
-      d: "M3 11h3c.8 0 1.6.3 2.1.9l1.1.9c1.6 1.6 4.1 1.6 5.7 0l1.1-.9c.5-.5 1.3-.9 2.1-.9H21",
-      key: "1dpki6"
-    }
-  ]
-]);
-/**
- * @license lucide-react v0.460.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const X = createLucideIcon("X", [
-  ["path", { d: "M18 6 6 18", key: "1bl5f8" }],
-  ["path", { d: "m6 6 12 12", key: "d8bk6v" }]
-]);
-const items = [
-  { key: "dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { key: "transactions", label: "Transacciones", icon: ReceiptText },
-  { key: "nomina", label: "Nómina", icon: WalletCards }
-];
-const Sidebar = ({ page, onNavigate }) => {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("aside", { className: "w-64 border-r border-slate-800/90 bg-slate-950/80 p-4", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-8 rounded-xl border border-brand-500/30 bg-brand-500/10 p-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-['Plus_Jakarta_Sans'] text-lg font-bold text-brand-200", children: "Tu Cualto App" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-xs text-slate-300", children: "Tu cualto. Tu flow. Siempre en control." })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { className: "space-y-2", children: items.map((item) => {
-      const Icon2 = item.icon;
-      const active = page === item.key;
-      return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+  };
+  if (employees.length === 0) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "surface-card grid h-40 place-items-center text-center text-[var(--text-secondary)]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(FileText, { size: 40, className: "mx-auto mb-2 text-[var(--text-muted)]" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm", children: "No hay empleados para generar nómina" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-[var(--text-muted)]", children: "Agrega empleados primero en la pestaña “Empleados”" })
+    ] }) });
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-sm text-[var(--text-secondary)]", children: "Período:" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            type: "month",
+            value: period,
+            onChange: (e3) => setPeriod(e3.target.value),
+            className: "rounded-[10px] border border-[var(--border)] bg-[var(--bg-elevated)] px-3 py-1.5 text-sm text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)]"
+          }
+        )
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(
         "button",
         {
           type: "button",
-          onClick: () => onNavigate(item.key),
-          className: `flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left transition ${active ? "bg-brand-500/20 text-brand-100 shadow-glow" : "text-slate-300 hover:bg-slate-800/70 hover:text-slate-100"}`,
+          onClick: () => void handleSend(),
+          disabled: sending || sent,
+          className: `flex items-center gap-2 rounded-[10px] px-4 py-2 text-sm font-semibold transition disabled:opacity-70 ${sent ? "bg-green-500 text-white" : "bg-[var(--accent)] text-[#080810]"}`,
           children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Icon2, { size: 18 }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium", children: item.label })
+            sent ? /* @__PURE__ */ jsxRuntimeExports.jsx(Check, { size: 14 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Send, { size: 14 }),
+            sent ? "¡Nómina enviada!" : sending ? "Enviando..." : "Enviar nómina"
           ]
-        },
-        item.key
-      );
-    }) })
-  ] });
-};
-const TitleBar = () => {
-  const [maximized, setMaximized] = reactExports.useState(false);
-  reactExports.useEffect(() => {
-    window.api.window.isMaximized().then(setMaximized).catch(() => void 0);
-    return window.api.window.onMaximizedChange(setMaximized);
-  }, []);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "app-region-drag flex h-11 items-center justify-between border-b border-slate-800 bg-slate-950/90 px-3", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "h-2.5 w-2.5 rounded-full bg-brand-400" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-medium uppercase tracking-[0.2em] text-slate-300", children: "Tu Cualto App" })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "app-region-no-drag flex items-center gap-1", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "button",
-        {
-          className: "rounded-md p-1.5 text-slate-300 hover:bg-slate-800 hover:text-slate-100",
-          onClick: () => window.api.window.minimize(),
-          type: "button",
-          children: /* @__PURE__ */ jsxRuntimeExports.jsx(Minus, { size: 14 })
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "button",
-        {
-          className: "rounded-md p-1.5 text-slate-300 hover:bg-slate-800 hover:text-slate-100",
-          onClick: () => window.api.window.toggleMaximize(),
-          type: "button",
-          children: maximized ? /* @__PURE__ */ jsxRuntimeExports.jsx(Minimize2, { size: 14 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Maximize2, { size: 14 })
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "button",
-        {
-          className: "rounded-md p-1.5 text-slate-300 hover:bg-rose-600 hover:text-white",
-          onClick: () => window.api.window.close(),
-          type: "button",
-          children: /* @__PURE__ */ jsxRuntimeExports.jsx(X, { size: 14 })
         }
       )
-    ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "surface-card overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("table", { className: "w-full", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("thead", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { className: "border-b border-[var(--border)]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3 text-left text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]", children: "Empleado" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3 text-right text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]", children: "Bruto" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3 text-right text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]", children: "AFP" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3 text-right text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]", children: "SFS" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3 text-right text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]", children: "ISR" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3 text-right text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]", children: "Descuentos" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3 text-right text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]", children: "Neto" })
+      ] }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("tbody", { children: details.map((d2, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { className: `border-b border-[var(--border)] transition hover:bg-white/5 ${i === details.length - 1 ? "border-b-0" : ""}`, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("td", { className: "px-4 py-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-[var(--text-primary)]", children: d2.name }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-[var(--text-muted)]", children: d2.occupation })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "amount px-4 py-3 text-right text-sm text-[var(--text-secondary)]", children: formatRD(d2.salaryBase) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "amount px-4 py-3 text-right text-sm text-[var(--violet)]", children: formatRD(d2.afp) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "amount px-4 py-3 text-right text-sm text-[var(--warning)]", children: formatRD(d2.sfs) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "amount px-4 py-3 text-right text-sm text-[var(--expense)]", children: formatRD(d2.isr) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "amount px-4 py-3 text-right text-sm text-[var(--text-secondary)]", children: formatRD(d2.totalDeductions) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "amount px-4 py-3 text-right text-sm font-semibold text-[var(--income)]", children: formatRD(d2.netSalary) })
+      ] }, d2.employeeId)) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("tfoot", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { className: "border-t border-[var(--border)] bg-[var(--bg-elevated)]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("td", { className: "px-4 py-3 text-sm font-semibold text-[var(--text-primary)]", children: [
+          "Total (",
+          details.length,
+          ")"
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "amount px-4 py-3 text-right text-sm text-[var(--text-secondary)]", children: formatRD(totals.totalGross) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("td", { colSpan: 4, className: "px-4 py-3 text-right text-xs text-[var(--text-muted)]", children: [
+          formatRD(totals.totalDeductions),
+          " en descuentos"
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "amount px-4 py-3 text-right text-sm font-semibold text-[var(--income)]", children: formatRD(totals.totalNet) })
+      ] }) })
+    ] }) })
   ] });
 };
+const HistoryTab = ({ payroll }) => {
+  const { payrollRecords } = payroll;
+  if (payrollRecords.length === 0) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "surface-card grid h-40 place-items-center text-center text-[var(--text-secondary)]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(History, { size: 40, className: "mx-auto mb-2 text-[var(--text-muted)]" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm", children: "No hay nóminas enviadas" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-[var(--text-muted)]", children: "Las nóminas enviadas aparecerán aquí" })
+    ] }) });
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3", children: payrollRecords.map((record) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "surface-card card-hover p-5", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm font-semibold text-[var(--text-primary)]", children: [
+          "Nómina ",
+          (/* @__PURE__ */ new Date(`${record.period}-01T00:00:00`)).toLocaleDateString("es-DO", { month: "long", year: "numeric" })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-[var(--text-muted)]", children: [
+          record.employeeCount,
+          " empleado",
+          record.employeeCount !== 1 ? "s" : "",
+          " · Enviada",
+          " ",
+          new Date(record.sentAt).toLocaleDateString("es-DO", { day: "2-digit", month: "short", year: "numeric" })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-right", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "amount text-lg font-semibold text-[var(--income)]", children: formatRD(record.totalNet) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-[var(--text-muted)]", children: "neto total" })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 grid grid-cols-3 gap-3 border-t border-[var(--border)] pt-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-[var(--text-muted)]", children: "Bruto" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "amount text-sm text-[var(--text-secondary)]", children: formatRD(record.totalGross) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-[var(--text-muted)]", children: "Descuentos" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "amount text-sm text-[var(--expense)]", children: formatRD(record.totalDeductions) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-[var(--text-muted)]", children: "Neto" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "amount text-sm text-[var(--income)]", children: formatRD(record.totalNet) })
+      ] })
+    ] })
+  ] }, record.id)) });
+};
+const FormField = ({
+  label,
+  value,
+  onChange,
+  placeholder,
+  type = "text"
+}) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+  /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "mb-1 block text-xs text-[var(--text-muted)]", children: label }),
+  /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "input",
+    {
+      type,
+      value,
+      onChange: (e3) => onChange(e3.target.value),
+      placeholder,
+      min: type === "number" ? "0" : void 0,
+      className: "w-full rounded-[10px] border border-[var(--border)] bg-[var(--bg-elevated)] px-3 py-2 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)]"
+    }
+  )
+] });
+const items = [
+  { key: "dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { key: "transactions", label: "Transacciones", icon: ArrowLeftRight },
+  { key: "nomina", label: "Nómina", icon: Calculator }
+];
+const Sidebar = ({ page, onNavigate }) => /* @__PURE__ */ jsxRuntimeExports.jsxs("aside", { className: "flex w-[200px] flex-col bg-[linear-gradient(180deg,#080810_0%,#0c0c16_100%)] px-3 py-4", children: [
+  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-6", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-1 flex items-center gap-2", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Zap, { size: 18, className: "text-[var(--accent)]", style: { filter: "drop-shadow(0 0 8px var(--accent))" } }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base font-semibold text-white", children: "Tu Cualto" })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] tracking-[0.5px] text-[var(--text-muted)]", children: "Tu cualto. Tu flow. Siempre en control." })
+  ] }),
+  /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { className: "space-y-1.5", children: items.map((item) => {
+    const Icon2 = item.icon;
+    const active = page === item.key;
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      "button",
+      {
+        type: "button",
+        title: item.label,
+        onClick: () => onNavigate(item.key),
+        className: `flex w-full items-center gap-2 rounded-[10px] px-3 py-2 text-sm transition-all duration-200 ${active ? "bg-[var(--accent-glow)] text-[var(--accent)]" : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"}`,
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Icon2, { size: 16, style: active ? { filter: "drop-shadow(0 0 6px var(--accent))" } : void 0 }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item.label })
+        ]
+      },
+      item.key
+    );
+  }) }),
+  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-auto border-t border-[var(--border)] pt-3", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 rounded-[10px] px-2 py-2 text-[var(--text-muted)]", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "grid h-7 w-7 place-items-center rounded-full bg-[var(--bg-elevated)] text-[10px] font-semibold text-[var(--text-secondary)]", children: "TC" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs", children: "Mi perfil" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(User, { size: 14 })
+  ] }) })
+] });
+const TitleBar = () => /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "app-region-drag flex h-10 items-center border-b border-white/5 bg-[#080810] px-3", children: [
+  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "app-region-no-drag flex items-center gap-2", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "status-dot" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[11px] font-medium uppercase tracking-[3px] text-[var(--text-secondary)]", children: "TU CUALTO APP" })
+  ] }),
+  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1" }),
+  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "app-region-no-drag flex items-center gap-1", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "rounded p-1 text-[var(--text-secondary)] transition hover:text-[var(--text-primary)]", onClick: () => void window.api.window.minimize(), type: "button", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Minus, { size: 14 }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "rounded p-1 text-[var(--text-secondary)] transition hover:text-[var(--text-primary)]", onClick: () => void window.api.window.toggleMaximize(), type: "button", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Square, { size: 14 }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "rounded p-1 text-[var(--text-secondary)] transition hover:text-[var(--expense)]", onClick: () => void window.api.window.close(), type: "button", children: /* @__PURE__ */ jsxRuntimeExports.jsx(X, { size: 14 }) })
+  ] })
+] });
 const getInitialPayload = (finance, initial) => ({
   title: initial?.title ?? "",
   amount: initial?.amount ?? 0,
@@ -37745,21 +38218,12 @@ const getInitialPayload = (finance, initial) => ({
   date: initial?.date ?? (/* @__PURE__ */ new Date()).toISOString().slice(0, 10),
   note: initial?.note ?? ""
 });
-const AddTransactionModal = ({
-  open,
-  onClose,
-  onSave,
-  finance,
-  initial
-}) => {
+const AddTransactionModal = ({ open, onClose, onSave, finance, initial }) => {
   const [payload, setPayload] = reactExports.useState(() => getInitialPayload(finance, initial));
   reactExports.useEffect(() => {
     if (open) setPayload(getInitialPayload(finance, initial));
   }, [open, initial, finance]);
-  const categoryOptions = reactExports.useMemo(
-    () => finance.categories.filter((c2) => c2.type === payload.type),
-    [finance.categories, payload.type]
-  );
+  const categoryOptions = reactExports.useMemo(() => finance.categories.filter((c2) => c2.type === payload.type), [finance.categories, payload.type]);
   if (!open) return null;
   const submit = async (e3) => {
     e3.preventDefault();
@@ -37767,165 +38231,196 @@ const AddTransactionModal = ({
     await onSave(payload);
     onClose();
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fixed inset-0 z-50 grid place-items-center bg-slate-950/70 p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: submit, className: "card w-full max-w-lg space-y-4 p-5", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("h3", { className: "text-lg font-semibold", children: [
-      initial ? "Editar" : "Nueva",
-      " transacción"
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-3", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "col-span-2 text-sm", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mb-1 block text-slate-300", children: "Título" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "input",
-          {
-            value: payload.title,
-            onChange: (e3) => setPayload((p2) => ({ ...p2, title: e3.target.value })),
-            className: "w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2"
-          }
-        )
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "text-sm", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mb-1 block text-slate-300", children: "Monto" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "input",
-          {
-            type: "number",
-            step: "0.01",
-            min: "0",
-            value: payload.amount,
-            onChange: (e3) => setPayload((p2) => ({ ...p2, amount: Number(e3.target.value) })),
-            className: "w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2"
-          }
-        )
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "text-sm", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mb-1 block text-slate-300", children: "Tipo" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          "select",
-          {
-            value: payload.type,
-            onChange: (e3) => setPayload((p2) => ({
-              ...p2,
-              type: e3.target.value,
-              categoryId: finance.categories.find((c2) => c2.type === e3.target.value)?.id ?? p2.categoryId
-            })),
-            className: "w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2",
-            children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "income", children: "Ingreso" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "expense", children: "Gasto" })
-            ]
-          }
-        )
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "text-sm", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mb-1 block text-slate-300", children: "Categoría" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "select",
-          {
-            value: payload.categoryId,
-            onChange: (e3) => setPayload((p2) => ({ ...p2, categoryId: Number(e3.target.value) })),
-            className: "w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2",
-            children: categoryOptions.map((category) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: category.id, children: category.name }, category.id))
-          }
-        )
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "text-sm", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mb-1 block text-slate-300", children: "Fecha" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "input",
-          {
-            type: "date",
-            value: payload.date,
-            onChange: (e3) => setPayload((p2) => ({ ...p2, date: e3.target.value })),
-            className: "w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2"
-          }
-        )
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "col-span-2 text-sm", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mb-1 block text-slate-300", children: "Nota" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "input",
-          {
-            value: payload.note,
-            onChange: (e3) => setPayload((p2) => ({ ...p2, note: e3.target.value })),
-            className: "w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2"
-          }
-        )
-      ] })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-end gap-2", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { type: "button", onClick: onClose, className: "rounded-lg border border-slate-700 px-4 py-2 text-sm", children: "Cancelar" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { type: "submit", className: "rounded-lg bg-brand-500 px-4 py-2 text-sm font-semibold text-white", children: "Guardar" })
-    ] })
-  ] }) });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fixed inset-0 z-50 grid place-items-center bg-black/70 p-4", style: { backdropFilter: "blur(12px)" }, onClick: onClose, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    motion.form,
+    {
+      initial: { opacity: 0, scale: 0.96 },
+      animate: { opacity: 1, scale: 1 },
+      transition: { duration: 0.2, ease: [0.4, 0, 0.2, 1] },
+      onClick: (e3) => e3.stopPropagation(),
+      onSubmit: submit,
+      className: "w-full max-w-[480px] space-y-4 rounded-[20px] border border-[var(--border)] bg-[var(--bg-elevated)] p-5",
+      style: { boxShadow: "0 25px 60px rgba(0,0,0,0.6)" },
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold", children: initial ? "Editar transacción" : "Nueva transacción" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              type: "button",
+              onClick: () => setPayload((p2) => ({ ...p2, type: "income" })),
+              className: `rounded-[10px] border px-3 py-2 text-sm ${payload.type === "income" ? "border-[var(--accent)] bg-[rgba(181,255,77,0.1)] text-[var(--accent)]" : "border-transparent bg-[var(--bg-surface)] text-[var(--text-secondary)]"}`,
+              children: "Ingreso"
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              type: "button",
+              onClick: () => setPayload((p2) => ({ ...p2, type: "expense" })),
+              className: `rounded-[10px] border px-3 py-2 text-sm ${payload.type === "expense" ? "border-[var(--expense)] bg-[rgba(255,69,96,0.1)] text-[var(--expense)]" : "border-transparent bg-[var(--bg-surface)] text-[var(--text-secondary)]"}`,
+              children: "Gasto"
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-[12px] bg-[var(--bg-surface)] px-4 py-3 text-center", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-1 text-[10px] uppercase tracking-[2px] text-[var(--text-muted)]", children: "Monto" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-end justify-center gap-2 border-b-2 border-white/10 pb-1", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xl text-[var(--text-muted)]", children: "RD$" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                type: "number",
+                step: "0.01",
+                min: "0",
+                placeholder: "0.00",
+                value: payload.amount || "",
+                onChange: (e3) => setPayload((p2) => ({ ...p2, amount: Number(e3.target.value) })),
+                className: `amount w-44 bg-transparent text-center text-[40px] leading-none ${payload.type === "income" ? "text-[var(--accent)]" : "text-[var(--expense)]"}`
+              }
+            )
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "block text-sm", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mb-1 block text-[var(--text-secondary)]", children: "Descripción" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("input", { value: payload.title, onChange: (e3) => setPayload((p2) => ({ ...p2, title: e3.target.value })), className: "w-full rounded-[10px] bg-[var(--bg-surface)] px-3 py-2 text-[var(--text-primary)]" })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-4 gap-2", children: categoryOptions.map((category) => {
+          const selected = payload.categoryId === category.id;
+          const color2 = payload.type === "income" ? "181,255,77" : "255,69,96";
+          return /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              type: "button",
+              onClick: () => setPayload((p2) => ({ ...p2, categoryId: category.id })),
+              className: `rounded-lg border px-2 py-2 text-center text-xs transition ${selected ? "scale-105" : ""}`,
+              style: {
+                borderColor: selected ? `rgb(${color2})` : "transparent",
+                background: selected ? `rgba(${color2},0.25)` : `rgba(${color2},0.1)`
+              },
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: category.name })
+            },
+            category.id
+          );
+        }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "text-sm", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mb-1 block text-[var(--text-secondary)]", children: "Fecha" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("input", { type: "date", value: payload.date, onChange: (e3) => setPayload((p2) => ({ ...p2, date: e3.target.value })), className: "w-full rounded-[10px] bg-[var(--bg-surface)] px-3 py-2" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "text-sm", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mb-1 block text-[var(--text-secondary)]", children: "Nota" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("input", { value: payload.note, onChange: (e3) => setPayload((p2) => ({ ...p2, note: e3.target.value })), className: "w-full rounded-[10px] bg-[var(--bg-surface)] px-3 py-2" })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-end gap-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("button", { type: "button", onClick: onClose, className: "rounded-[10px] px-4 py-2 text-sm text-[var(--text-secondary)]", children: "Cancelar" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("button", { type: "submit", className: "rounded-[10px] bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[#080810]", children: "Guardar" })
+        ] })
+      ]
+    }
+  ) });
+};
+const headerLabel = (date2) => {
+  const target = /* @__PURE__ */ new Date(`${date2}T00:00:00`);
+  const now2 = /* @__PURE__ */ new Date();
+  const diff = Math.floor((new Date(now2.toDateString()).getTime() - new Date(target.toDateString()).getTime()) / 864e5);
+  if (diff === 0) return "HOY";
+  if (diff === 1) return "AYER";
+  return target.toLocaleDateString("es-DO", { weekday: "long", day: "2-digit", month: "short" }).toUpperCase();
 };
 const Transactions = ({ finance }) => {
   const [open, setOpen] = reactExports.useState(false);
   const [editing, setEditing] = reactExports.useState(null);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "space-y-4", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex justify-end", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+  const [query, setQuery] = reactExports.useState("");
+  const [filter2, setFilter] = reactExports.useState("all");
+  const filtered = reactExports.useMemo(() => {
+    return finance.transactions.filter((tx) => {
+      const matchesType = filter2 === "all" || tx.type === filter2;
+      const text = `${tx.title} ${tx.categoryName} ${tx.note}`.toLowerCase();
+      const matchesQuery = text.includes(query.toLowerCase());
+      return matchesType && matchesQuery;
+    });
+  }, [finance.transactions, query, filter2]);
+  const grouped = reactExports.useMemo(() => {
+    const map2 = /* @__PURE__ */ new Map();
+    filtered.forEach((tx) => {
+      const key = tx.date.slice(0, 10);
+      const arr = map2.get(key) ?? [];
+      arr.push(tx);
+      map2.set(key, arr);
+    });
+    return Array.from(map2.entries()).sort((a2, b2) => a2[0] > b2[0] ? -1 : 1);
+  }, [filtered]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "relative h-full space-y-3 pb-20", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+      ["all", "income", "expense"].map((key) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          type: "button",
+          onClick: () => setFilter(key),
+          className: `rounded-full px-3 py-1.5 text-xs ${filter2 === key ? "bg-[var(--accent)] text-[#080810]" : "bg-[var(--bg-elevated)] text-[var(--text-secondary)]"}`,
+          children: key === "all" ? "Todos" : key === "income" ? "Ingresos" : "Gastos"
+        },
+        key
+      )),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "ml-auto flex items-center gap-2 rounded-xl bg-[var(--bg-elevated)] px-3 py-2 text-[var(--text-secondary)]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { size: 14 }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("input", { value: query, onChange: (e3) => setQuery(e3.target.value), placeholder: "Buscar...", className: "w-52 bg-transparent text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)]" })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-[calc(100%-46px)] overflow-y-auto pr-1", children: grouped.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid h-full place-items-center text-center text-[var(--text-secondary)]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { width: "120", height: "64", viewBox: "0 0 120 64", fill: "none", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M4 48H30L44 36L58 42L78 22L94 30L116 14", stroke: "currentColor", strokeWidth: "2" }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm", children: "Aún no hay datos" })
+    ] }) }) : grouped.map(([date2, items2]) => {
+      const subtotal = items2.reduce((sum, tx) => sum + (tx.type === "income" ? tx.amount : -tx.amount), 0);
+      return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-1 flex items-center gap-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] uppercase tracking-[2px] text-[var(--text-muted)]", children: headerLabel(date2) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-px flex-1 bg-[var(--border)]" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: `amount text-xs ${subtotal >= 0 ? "text-[var(--income)]" : "text-[var(--expense)]"}`, children: [
+            subtotal >= 0 ? "+" : "",
+            formatRD(subtotal)
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-1", children: items2.map((tx) => /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { initial: { opacity: 0, x: -10 }, animate: { opacity: 1, x: 0 }, className: "group flex items-center justify-between rounded-[10px] border border-transparent px-3 py-2 transition hover:bg-[var(--bg-elevated)]", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-[var(--text-primary)]", children: tx.title }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-[var(--text-muted)]", children: [
+              tx.categoryName,
+              " · ",
+              new Date(tx.date).toLocaleTimeString("es-DO", { hour: "numeric", minute: "2-digit" })
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: `amount text-sm ${tx.type === "income" ? "text-[var(--income)]" : "text-[var(--expense)]"}`, children: [
+              tx.type === "income" ? "+" : "-",
+              formatRD(tx.amount)
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-1 opacity-0 transition group-hover:opacity-100", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("button", { type: "button", onClick: () => {
+                setEditing(tx);
+                setOpen(true);
+              }, className: "rounded p-1 text-[var(--text-secondary)] hover:text-[var(--text-primary)]", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Pencil, { size: 14 }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("button", { type: "button", onClick: () => void finance.deleteTransaction(tx.id), className: "rounded p-1 text-[var(--text-secondary)] hover:text-[var(--expense)]", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Trash2, { size: 14 }) })
+            ] })
+          ] })
+        ] }, tx.id)) })
+      ] }, date2);
+    }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
       "button",
       {
-        className: "inline-flex items-center gap-2 rounded-xl bg-brand-500 px-4 py-2 text-sm font-semibold text-white",
+        type: "button",
         onClick: () => {
           setEditing(null);
           setOpen(true);
         },
-        type: "button",
-        children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 16 }),
-          " Nueva transacción"
-        ]
+        className: "absolute bottom-3 right-3 grid h-[52px] w-[52px] place-items-center rounded-full bg-[var(--accent)] text-[#080810]",
+        style: { boxShadow: "0 4px 20px rgba(181,255,77,0.4)" },
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 18 })
       }
-    ) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "card overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("table", { className: "w-full text-sm", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("thead", { className: "bg-slate-900/90 text-left text-slate-400", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3 font-medium", children: "Fecha" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3 font-medium", children: "Descripción" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3 font-medium", children: "Categoría" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3 font-medium", children: "Monto" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3 font-medium", children: "Acciones" })
-      ] }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("tbody", { children: [
-        finance.transactions.map((tx) => /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { className: "border-t border-slate-800/70", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3 text-slate-300", children: new Date(tx.date).toLocaleDateString("es-DO") }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("td", { className: "px-4 py-3", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-medium text-slate-100", children: tx.title }),
-            tx.note ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs text-slate-500", children: tx.note }) : null
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3 text-slate-300", children: tx.categoryName }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("td", { className: `px-4 py-3 font-semibold ${tx.type === "income" ? "text-emerald-300" : "text-rose-300"}`, children: [
-            tx.type === "income" ? "+" : "-",
-            " ",
-            formatRD(tx.amount)
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-3", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              "button",
-              {
-                className: "rounded-md p-1.5 text-slate-300 hover:bg-slate-800",
-                onClick: () => {
-                  setEditing(tx);
-                  setOpen(true);
-                },
-                type: "button",
-                children: /* @__PURE__ */ jsxRuntimeExports.jsx(Pencil, { size: 14 })
-              }
-            ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              "button",
-              {
-                className: "rounded-md p-1.5 text-rose-300 hover:bg-rose-900/50",
-                onClick: () => void finance.deleteTransaction(tx.id),
-                type: "button",
-                children: /* @__PURE__ */ jsxRuntimeExports.jsx(Trash2, { size: 14 })
-              }
-            )
-          ] }) })
-        ] }, tx.id)),
-        finance.transactions.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("tr", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("td", { colSpan: 5, className: "px-4 py-10 text-center text-slate-500", children: "No hay transacciones aún." }) }) : null
-      ] })
-    ] }) }),
+    ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       AddTransactionModal,
       {
@@ -38003,38 +38498,95 @@ const useFinance = () => {
     refetch
   };
 };
+const usePayroll = () => {
+  const [employees, setEmployees] = reactExports.useState([]);
+  const [payrollRecords, setPayrollRecords] = reactExports.useState([]);
+  const [loading, setLoading] = reactExports.useState(true);
+  const refetch = reactExports.useCallback(async () => {
+    setLoading(true);
+    try {
+      const [emps, records] = await Promise.all([window.api.employees.list(), window.api.payroll.list()]);
+      setEmployees(emps);
+      setPayrollRecords(records);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+  reactExports.useEffect(() => {
+    void refetch();
+  }, [refetch]);
+  const createEmployee = reactExports.useCallback(
+    async (payload) => {
+      await window.api.employees.create(payload);
+      await refetch();
+    },
+    [refetch]
+  );
+  const updateEmployee = reactExports.useCallback(
+    async (id2, payload) => {
+      await window.api.employees.update(id2, payload);
+      await refetch();
+    },
+    [refetch]
+  );
+  const deleteEmployee = reactExports.useCallback(
+    async (id2) => {
+      await window.api.employees.remove(id2);
+      await refetch();
+    },
+    [refetch]
+  );
+  const sendPayroll = reactExports.useCallback(
+    async (payload) => {
+      await window.api.payroll.send(payload);
+      await refetch();
+    },
+    [refetch]
+  );
+  return {
+    loading,
+    employees,
+    payrollRecords,
+    createEmployee,
+    updateEmployee,
+    deleteEmployee,
+    sendPayroll,
+    refetch
+  };
+};
 const pages = {
   dashboard: Dashboard,
   transactions: Transactions,
   nomina: Nomina
 };
 const pageMeta = {
-  dashboard: { title: "Dashboard" },
-  transactions: { title: "Transacciones" },
-  nomina: { title: "Calculadora de Nómina" }
+  dashboard: { title: "Dashboard", subtitle: "Resumen financiero de tu flow" },
+  transactions: { title: "Transacciones", subtitle: "Control total de movimientos" },
+  nomina: { title: "Sistema de Nómina", subtitle: "Gestión de empleados y pago de nóminas" }
 };
 function App() {
   const [page, setPage] = reactExports.useState("dashboard");
   const finance = useFinance();
+  const payroll = usePayroll();
   const CurrentPage = reactExports.useMemo(() => pages[page], [page]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full w-full overflow-hidden bg-transparent text-slate-100", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full w-full overflow-hidden bg-transparent text-[var(--text-primary)]", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(TitleBar, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-[calc(100%-44px)]", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-[calc(100%-40px)]", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(Sidebar, { page, onNavigate: setPage }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "relative flex-1 overflow-hidden p-6", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-6", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-['Plus_Jakarta_Sans'] text-2xl font-bold tracking-tight", children: pageMeta[page].title }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-slate-400", children: "Tu cualto. Tu flow. Siempre en control." })
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-5", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-2xl font-semibold", children: pageMeta[page].title }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-[var(--text-secondary)]", children: pageMeta[page].subtitle })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { mode: "wait", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
           motion.div,
           {
-            initial: { x: 30, opacity: 0 },
-            animate: { x: 0, opacity: 1 },
-            exit: { x: -30, opacity: 0 },
-            transition: { duration: 0.2, ease: "easeOut" },
-            className: "h-[calc(100%-72px)] overflow-y-auto pr-1",
-            children: /* @__PURE__ */ jsxRuntimeExports.jsx(CurrentPage, { finance })
+            initial: { opacity: 0, x: 16 },
+            animate: { opacity: 1, x: 0 },
+            exit: { opacity: 0, x: -8 },
+            transition: { duration: 0.25, ease: [0.4, 0, 0.2, 1] },
+            className: "h-[calc(100%-62px)] overflow-y-auto pr-1",
+            children: /* @__PURE__ */ jsxRuntimeExports.jsx(CurrentPage, { finance, payroll })
           },
           page
         ) })

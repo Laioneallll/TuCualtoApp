@@ -129,6 +129,71 @@ const registerIpc = (): void => {
 
   ipcMain.handle('nomina:calculate', (_event, salary: number) => calculateNomina(salary))
 
+  // ─── Employee handlers ────────────────────────────────────────────────────
+  ipcMain.handle('employees:list', () =>
+    db.prepare('SELECT * FROM employees ORDER BY name ASC').all()
+  )
+
+  ipcMain.handle('employees:create', (_event, payload) => {
+    const stmt = db.prepare(
+      'INSERT INTO employees (name, occupation, salaryBase, department, phone, email) VALUES (@name, @occupation, @salaryBase, @department, @phone, @email)'
+    )
+    const result = stmt.run({
+      name: payload.name,
+      occupation: payload.occupation,
+      salaryBase: payload.salaryBase,
+      department: payload.department ?? '',
+      phone: payload.phone ?? '',
+      email: payload.email ?? ''
+    })
+    return { id: Number(result.lastInsertRowid) }
+  })
+
+  ipcMain.handle('employees:update', (_event, id: number, payload) => {
+    const stmt = db.prepare(
+      'UPDATE employees SET name=@name, occupation=@occupation, salaryBase=@salaryBase, department=@department, phone=@phone, email=@email WHERE id=@id'
+    )
+    const result = stmt.run({
+      id,
+      name: payload.name,
+      occupation: payload.occupation,
+      salaryBase: payload.salaryBase,
+      department: payload.department ?? '',
+      phone: payload.phone ?? '',
+      email: payload.email ?? ''
+    })
+    return { updated: result.changes > 0 }
+  })
+
+  ipcMain.handle('employees:delete', (_event, id: number) => {
+    const result = db.prepare('DELETE FROM employees WHERE id = ?').run(id)
+    return { deleted: result.changes > 0 }
+  })
+
+  // ─── Payroll handlers ─────────────────────────────────────────────────────
+  ipcMain.handle('payroll:send', (_event, payload) => {
+    const stmt = db.prepare(
+      'INSERT INTO payroll_records (period, employeeCount, totalGross, totalNet, totalDeductions, details) VALUES (@period, @employeeCount, @totalGross, @totalNet, @totalDeductions, @details)'
+    )
+    const result = stmt.run({
+      period: payload.period,
+      employeeCount: payload.employeeCount,
+      totalGross: payload.totalGross,
+      totalNet: payload.totalNet,
+      totalDeductions: payload.totalDeductions,
+      details: JSON.stringify(payload.details ?? [])
+    })
+    return { id: Number(result.lastInsertRowid) }
+  })
+
+  ipcMain.handle('payroll:list', () =>
+    db
+      .prepare(
+        'SELECT id, period, employeeCount, totalGross, totalNet, totalDeductions, sentAt FROM payroll_records ORDER BY sentAt DESC LIMIT 20'
+      )
+      .all()
+  )
+
   ipcMain.handle('window:minimize', () => mainWindow?.minimize())
   ipcMain.handle('window:toggle-maximize', () => {
     if (!mainWindow) return false
