@@ -111,6 +111,13 @@ export interface SendPayrollPayload {
   details: PayrollEmployeeDetail[]
 }
 
+export interface AccessibilitySettings {
+  highContrast: boolean
+  largeText: boolean
+  reducedMotion: boolean
+  narrator: boolean
+}
+
 declare global {
   interface Window {
     api: {

@@ -1,10 +1,13 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { Check, FileText, History, Pencil, Plus, Send, Trash2, Users, X } from 'lucide-react'
-import { useMemo, useState } from 'react'
+import { memo, useCallback, useMemo, useState } from 'react'
 import type { UsePayroll } from '../hooks/usePayroll'
 import type { Employee, EmployeePayload, PayrollEmployeeDetail } from '../types'
+import type { AccessibilitySettings } from '../types'
 import { calculateNomina, formatRD } from '../utils/nominaCalc'
 import type { UseFinance } from '../hooks/useFinance'
+import { ConfirmDialog } from './ConfirmDialog'
+import { useToast } from './Toast'
 
 type Tab = 'employees' | 'payroll' | 'history'
 
@@ -19,19 +22,19 @@ const defaultPayload = (): EmployeePayload => ({
 
 const currentPeriod = (): string => new Date().toISOString().slice(0, 7)
 
-export const Nomina = ({ payroll }: { finance: UseFinance; payroll: UsePayroll }): JSX.Element => {
+export const Nomina = ({ payroll }: { finance: UseFinance; payroll: UsePayroll; accessibility?: AccessibilitySettings; onAccessibilityChange?: (patch: Partial<AccessibilitySettings>) => void }): JSX.Element => {
   const [tab, setTab] = useState<Tab>('employees')
 
   return (
-    <section className="space-y-4">
-      <div className="flex gap-2 border-b border-[var(--border)] pb-3">
-        <TabButton active={tab === 'employees'} onClick={() => setTab('employees')} icon={<Users size={14} />} label="Empleados" />
-        <TabButton active={tab === 'payroll'} onClick={() => setTab('payroll')} icon={<FileText size={14} />} label="Generar Nómina" />
-        <TabButton active={tab === 'history'} onClick={() => setTab('history')} icon={<History size={14} />} label="Historial" />
+    <section className="space-y-4" aria-label="Sistema de nómina">
+      <div className="flex gap-2 border-b border-[var(--border)] pb-3" role="tablist" aria-label="Secciones de nómina">
+        <TabButton active={tab === 'employees'} onClick={() => setTab('employees')} icon={<Users size={14} aria-hidden="true" />} label="Empleados" />
+        <TabButton active={tab === 'payroll'} onClick={() => setTab('payroll')} icon={<FileText size={14} aria-hidden="true" />} label="Generar Nómina" />
+        <TabButton active={tab === 'history'} onClick={() => setTab('history')} icon={<History size={14} aria-hidden="true" />} label="Historial" />
       </div>
 
       <AnimatePresence mode="wait">
-        <motion.div key={tab} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.2 }}>
+        <motion.div key={tab} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.2 }} role="tabpanel" aria-label={`Panel de ${tab}`}>
           {tab === 'employees' && <EmployeesTab payroll={payroll} />}
           {tab === 'payroll' && <PayrollTab payroll={payroll} />}
           {tab === 'history' && <HistoryTab payroll={payroll} />}
@@ -41,7 +44,7 @@ export const Nomina = ({ payroll }: { finance: UseFinance; payroll: UsePayroll }
   )
 }
 
-const TabButton = ({
+const TabButton = memo(({
   active,
   onClick,
   icon,
@@ -54,6 +57,8 @@ const TabButton = ({
 }): JSX.Element => (
   <button
     type="button"
+    role="tab"
+    aria-selected={active}
     onClick={onClick}
     className={`flex items-center gap-2 rounded-[10px] px-4 py-2 text-sm transition-all duration-200 ${
       active ? 'bg-[var(--accent-glow)] text-[var(--accent)]' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
@@ -62,23 +67,27 @@ const TabButton = ({
     {icon}
     {label}
   </button>
-)
+))
+
+TabButton.displayName = 'TabButton'
 
 // ─── Employees Tab ────────────────────────────────────────────────────────────
 
 const EmployeesTab = ({ payroll }: { payroll: UsePayroll }): JSX.Element => {
   const { employees, createEmployee, updateEmployee, deleteEmployee } = payroll
+  const { toast } = useToast()
   const [showForm, setShowForm] = useState(false)
   const [editing, setEditing] = useState<Employee | null>(null)
   const [form, setForm] = useState<EmployeePayload>(defaultPayload())
+  const [confirmDelete, setConfirmDelete] = useState<Employee | null>(null)
 
-  const openAdd = () => {
+  const openAdd = (): void => {
     setEditing(null)
     setForm(defaultPayload())
     setShowForm(true)
   }
 
-  const openEdit = (emp: Employee) => {
+  const openEdit = (emp: Employee): void => {
     setEditing(emp)
     setForm({
       name: emp.name,
@@ -91,23 +100,32 @@ const EmployeesTab = ({ payroll }: { payroll: UsePayroll }): JSX.Element => {
     setShowForm(true)
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (): Promise<void> => {
     if (!form.name.trim() || !form.occupation.trim() || form.salaryBase <= 0) return
     if (editing) {
       await updateEmployee(editing.id, form)
+      toast('Empleado actualizado correctamente')
     } else {
       await createEmployee(form)
+      toast('Empleado agregado correctamente')
     }
     setShowForm(false)
     setForm(defaultPayload())
     setEditing(null)
   }
 
-  const handleCancel = () => {
+  const handleCancel = (): void => {
     setShowForm(false)
     setForm(defaultPayload())
     setEditing(null)
   }
+
+  const handleDelete = useCallback(async () => {
+    if (!confirmDelete) return
+    await deleteEmployee(confirmDelete.id)
+    toast('Empleado eliminado correctamente')
+    setConfirmDelete(null)
+  }, [confirmDelete, deleteEmployee, toast])
 
   return (
     <div className="space-y-4">
@@ -115,8 +133,13 @@ const EmployeesTab = ({ payroll }: { payroll: UsePayroll }): JSX.Element => {
         <p className="text-sm text-[var(--text-secondary)]">
           {employees.length} empleado{employees.length !== 1 ? 's' : ''} registrado{employees.length !== 1 ? 's' : ''}
         </p>
-        <button type="button" onClick={openAdd} className="flex items-center gap-2 rounded-[10px] bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[#080810]">
-          <Plus size={14} />
+        <button
+          type="button"
+          onClick={openAdd}
+          title="Agregar nuevo empleado"
+          className="flex items-center gap-2 rounded-[10px] bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[#080810]"
+        >
+          <Plus size={14} aria-hidden="true" />
           Agregar empleado
         </button>
       </div>
@@ -134,11 +157,11 @@ const EmployeesTab = ({ payroll }: { payroll: UsePayroll }): JSX.Element => {
           </div>
           <div className="mt-4 flex gap-2">
             <button type="button" onClick={() => void handleSubmit()} className="flex items-center gap-2 rounded-[10px] bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[#080810]">
-              <Check size={14} />
+              <Check size={14} aria-hidden="true" />
               {editing ? 'Guardar cambios' : 'Agregar'}
             </button>
             <button type="button" onClick={handleCancel} className="flex items-center gap-2 rounded-[10px] border border-[var(--border)] px-4 py-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)]">
-              <X size={14} />
+              <X size={14} aria-hidden="true" />
               Cancelar
             </button>
           </div>
@@ -148,9 +171,17 @@ const EmployeesTab = ({ payroll }: { payroll: UsePayroll }): JSX.Element => {
       {employees.length === 0 ? (
         <div className="surface-card grid h-40 place-items-center text-center text-[var(--text-secondary)]">
           <div>
-            <Users size={40} className="mx-auto mb-2 text-[var(--text-muted)]" />
+            <Users size={40} className="mx-auto mb-2 text-[var(--text-muted)]" aria-hidden="true" />
             <p className="text-sm">No hay empleados registrados</p>
-            <p className="text-xs text-[var(--text-muted)]">Agrega el primer empleado para comenzar</p>
+            <p className="mt-1 text-xs text-[var(--text-muted)]">Agrega el primer empleado para comenzar</p>
+            <button
+              type="button"
+              onClick={openAdd}
+              className="mt-3 mx-auto flex items-center gap-2 rounded-[10px] bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[#080810]"
+            >
+              <Plus size={14} aria-hidden="true" />
+              Agregar empleado
+            </button>
           </div>
         </div>
       ) : (
@@ -158,11 +189,11 @@ const EmployeesTab = ({ payroll }: { payroll: UsePayroll }): JSX.Element => {
           <table className="w-full">
             <thead>
               <tr className="border-b border-[var(--border)]">
-                <th className="px-4 py-3 text-left text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]">Nombre</th>
-                <th className="px-4 py-3 text-left text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]">Ocupación</th>
-                <th className="px-4 py-3 text-left text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]">Departamento</th>
-                <th className="px-4 py-3 text-right text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]">Sueldo base</th>
-                <th className="px-4 py-3 text-center text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]">Acciones</th>
+                <th scope="col" className="px-4 py-3 text-left text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]">Nombre</th>
+                <th scope="col" className="px-4 py-3 text-left text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]">Ocupación</th>
+                <th scope="col" className="px-4 py-3 text-left text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]">Departamento</th>
+                <th scope="col" className="px-4 py-3 text-right text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]">Sueldo base</th>
+                <th scope="col" className="px-4 py-3 text-center text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]">Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -180,11 +211,23 @@ const EmployeesTab = ({ payroll }: { payroll: UsePayroll }): JSX.Element => {
                   <td className="amount px-4 py-3 text-right text-sm text-[var(--income)]">{formatRD(emp.salaryBase)}</td>
                   <td className="px-4 py-3">
                     <div className="flex items-center justify-center gap-2">
-                      <button type="button" onClick={() => openEdit(emp)} className="rounded-[8px] p-1.5 text-[var(--text-muted)] transition hover:bg-white/10 hover:text-[var(--accent)]">
-                        <Pencil size={13} />
+                      <button
+                        type="button"
+                        title="Editar empleado"
+                        aria-label={`Editar empleado: ${emp.name}`}
+                        onClick={() => openEdit(emp)}
+                        className="rounded-[8px] p-1.5 text-[var(--text-muted)] transition hover:bg-white/10 hover:text-[var(--accent)]"
+                      >
+                        <Pencil size={13} aria-hidden="true" />
                       </button>
-                      <button type="button" onClick={() => void deleteEmployee(emp.id)} className="rounded-[8px] p-1.5 text-[var(--text-muted)] transition hover:bg-white/10 hover:text-[var(--expense)]">
-                        <Trash2 size={13} />
+                      <button
+                        type="button"
+                        title="Eliminar empleado"
+                        aria-label={`Eliminar empleado: ${emp.name}`}
+                        onClick={() => setConfirmDelete(emp)}
+                        className="rounded-[8px] p-1.5 text-[var(--text-muted)] transition hover:bg-white/10 hover:text-[var(--expense)]"
+                      >
+                        <Trash2 size={13} aria-hidden="true" />
                       </button>
                     </div>
                   </td>
@@ -194,6 +237,14 @@ const EmployeesTab = ({ payroll }: { payroll: UsePayroll }): JSX.Element => {
           </table>
         </div>
       )}
+
+      <ConfirmDialog
+        open={confirmDelete !== null}
+        title="Eliminar empleado"
+        message={`¿Estás seguro de que deseas eliminar a "${confirmDelete?.name ?? ''}"? Esta acción no se puede deshacer.`}
+        onConfirm={() => void handleDelete()}
+        onCancel={() => setConfirmDelete(null)}
+      />
     </div>
   )
 }
@@ -202,6 +253,7 @@ const EmployeesTab = ({ payroll }: { payroll: UsePayroll }): JSX.Element => {
 
 const PayrollTab = ({ payroll }: { payroll: UsePayroll }): JSX.Element => {
   const { employees, sendPayroll } = payroll
+  const { toast } = useToast()
   const [period, setPeriod] = useState(currentPeriod)
   const [sending, setSending] = useState(false)
   const [sent, setSent] = useState(false)
@@ -234,12 +286,13 @@ const PayrollTab = ({ payroll }: { payroll: UsePayroll }): JSX.Element => {
     [details]
   )
 
-  const handleSend = async () => {
+  const handleSend = async (): Promise<void> => {
     if (employees.length === 0) return
     setSending(true)
     try {
       await sendPayroll({ period, employeeCount: employees.length, ...totals, details })
       setSent(true)
+      toast('Nómina enviada exitosamente')
       setTimeout(() => setSent(false), 3000)
     } finally {
       setSending(false)
@@ -250,7 +303,7 @@ const PayrollTab = ({ payroll }: { payroll: UsePayroll }): JSX.Element => {
     return (
       <div className="surface-card grid h-40 place-items-center text-center text-[var(--text-secondary)]">
         <div>
-          <FileText size={40} className="mx-auto mb-2 text-[var(--text-muted)]" />
+          <FileText size={40} className="mx-auto mb-2 text-[var(--text-muted)]" aria-hidden="true" />
           <p className="text-sm">No hay empleados para generar nómina</p>
           <p className="text-xs text-[var(--text-muted)]">Agrega empleados primero en la pestaña &ldquo;Empleados&rdquo;</p>
         </div>
@@ -262,8 +315,9 @@ const PayrollTab = ({ payroll }: { payroll: UsePayroll }): JSX.Element => {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <label className="text-sm text-[var(--text-secondary)]">Período:</label>
+          <label htmlFor="payroll-period" className="text-sm text-[var(--text-secondary)]">Período:</label>
           <input
+            id="payroll-period"
             type="month"
             value={period}
             onChange={(e) => setPeriod(e.target.value)}
@@ -276,7 +330,7 @@ const PayrollTab = ({ payroll }: { payroll: UsePayroll }): JSX.Element => {
           disabled={sending || sent}
           className={`flex items-center gap-2 rounded-[10px] px-4 py-2 text-sm font-semibold transition disabled:opacity-70 ${sent ? 'bg-green-500 text-white' : 'bg-[var(--accent)] text-[#080810]'}`}
         >
-          {sent ? <Check size={14} /> : <Send size={14} />}
+          {sent ? <Check size={14} aria-hidden="true" /> : <Send size={14} aria-hidden="true" />}
           {sent ? '¡Nómina enviada!' : sending ? 'Enviando...' : 'Enviar nómina'}
         </button>
       </div>
@@ -285,13 +339,13 @@ const PayrollTab = ({ payroll }: { payroll: UsePayroll }): JSX.Element => {
         <table className="w-full">
           <thead>
             <tr className="border-b border-[var(--border)]">
-              <th className="px-4 py-3 text-left text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]">Empleado</th>
-              <th className="px-4 py-3 text-right text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]">Bruto</th>
-              <th className="px-4 py-3 text-right text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]">AFP</th>
-              <th className="px-4 py-3 text-right text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]">SFS</th>
-              <th className="px-4 py-3 text-right text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]">ISR</th>
-              <th className="px-4 py-3 text-right text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]">Descuentos</th>
-              <th className="px-4 py-3 text-right text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]">Neto</th>
+              <th scope="col" className="px-4 py-3 text-left text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]">Empleado</th>
+              <th scope="col" className="px-4 py-3 text-right text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]">Bruto</th>
+              <th scope="col" className="px-4 py-3 text-right text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]">AFP</th>
+              <th scope="col" className="px-4 py-3 text-right text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]">SFS</th>
+              <th scope="col" className="px-4 py-3 text-right text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]">ISR</th>
+              <th scope="col" className="px-4 py-3 text-right text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]">Descuentos</th>
+              <th scope="col" className="px-4 py-3 text-right text-xs uppercase tracking-[1.5px] text-[var(--text-muted)]">Neto</th>
             </tr>
           </thead>
           <tbody>
@@ -333,7 +387,7 @@ const HistoryTab = ({ payroll }: { payroll: UsePayroll }): JSX.Element => {
     return (
       <div className="surface-card grid h-40 place-items-center text-center text-[var(--text-secondary)]">
         <div>
-          <History size={40} className="mx-auto mb-2 text-[var(--text-muted)]" />
+          <History size={40} className="mx-auto mb-2 text-[var(--text-muted)]" aria-hidden="true" />
           <p className="text-sm">No hay nóminas enviadas</p>
           <p className="text-xs text-[var(--text-muted)]">Las nóminas enviadas aparecerán aquí</p>
         </div>
@@ -382,7 +436,7 @@ const HistoryTab = ({ payroll }: { payroll: UsePayroll }): JSX.Element => {
 
 // ─── Shared form field ────────────────────────────────────────────────────────
 
-const FormField = ({
+const FormField = memo(({
   label,
   value,
   onChange,
@@ -396,15 +450,18 @@ const FormField = ({
   type?: string
 }): JSX.Element => (
   <div>
-    <label className="mb-1 block text-xs text-[var(--text-muted)]">{label}</label>
-    <input
-      type={type}
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      placeholder={placeholder}
-      min={type === 'number' ? '0' : undefined}
-      className="w-full rounded-[10px] border border-[var(--border)] bg-[var(--bg-elevated)] px-3 py-2 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)]"
-    />
+    <label className="mb-1 block text-xs text-[var(--text-muted)]">
+      {label}
+      <input
+        type={type}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        min={type === 'number' ? '0' : undefined}
+        className="mt-1 w-full rounded-[10px] border border-[var(--border)] bg-[var(--bg-elevated)] px-3 py-2 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)]"
+      />
+    </label>
   </div>
-)
+))
 
+FormField.displayName = 'FormField'

@@ -3,6 +3,7 @@ import { FileText } from 'lucide-react'
 import { Area, AreaChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis } from 'recharts'
 import type { UsePayroll } from '../hooks/usePayroll'
 import type { UseFinance } from '../hooks/useFinance'
+import type { AccessibilitySettings } from '../types'
 import { formatRD } from '../utils/nominaCalc'
 
 const monthName = (value: string): string =>
@@ -17,8 +18,8 @@ const relativeDate = (iso: string): string => {
   return `hace ${diffDays}d`
 }
 
-export const Dashboard = ({ finance, payroll }: { finance: UseFinance; payroll: UsePayroll }): JSX.Element => {
-  const { stats, transactions } = finance
+export const Dashboard = ({ finance, payroll }: { finance: UseFinance; payroll: UsePayroll; accessibility?: AccessibilitySettings; onAccessibilityChange?: (patch: Partial<AccessibilitySettings>) => void }): JSX.Element => {
+  const { stats, transactions, loading } = finance
   const savingRate = stats.totalIncome > 0 ? ((stats.totalIncome - stats.totalExpense) / stats.totalIncome) * 100 : 0
   const latestMonth = stats.monthly.at(-1)?.month ?? new Date().toISOString().slice(0, 7)
   const recent = transactions.slice(0, 5)
@@ -27,10 +28,20 @@ export const Dashboard = ({ finance, payroll }: { finance: UseFinance; payroll: 
   const pieColors = ['#ff4560', '#7c3aed', '#ffb830', '#b5ff4d', '#5b21b6', '#c084fc']
   const recentPayrolls = payroll.payrollRecords.slice(0, 3)
 
+  if (loading) {
+    return (
+      <section className="flex items-center justify-center py-20" aria-label="Dashboard">
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-[var(--accent)] border-t-transparent" role="status">
+          <span className="sr-only">Cargando dashboard...</span>
+        </div>
+      </section>
+    )
+  }
+
   return (
-    <section className="space-y-4">
-      <div className="grid grid-cols-12 gap-3">
-        <motion.div className="surface-card card-hover col-span-6 bg-[linear-gradient(130deg,#0f0f1a_0%,#161625_100%)] p-6" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
+    <section className="space-y-4" aria-label="Dashboard - Resumen financiero">
+      <div className="grid grid-cols-12 gap-3" role="group" aria-label="Indicadores principales">
+        <motion.div className="surface-card card-hover col-span-6 bg-[linear-gradient(130deg,#0f0f1a_0%,#161625_100%)] p-6" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} aria-label={`Balance neto: ${formatRD(stats.balance)}`}>
           <div className="mb-3 flex items-center justify-between">
             <p className="text-[10px] uppercase tracking-[2px] text-[var(--text-muted)]">BALANCE NETO</p>
             <span className="rounded-full bg-[var(--bg-elevated)] px-2 py-1 text-xs text-[var(--text-secondary)]">{monthName(latestMonth)}</span>
@@ -41,24 +52,24 @@ export const Dashboard = ({ finance, payroll }: { finance: UseFinance; payroll: 
           <p className="mt-3 text-xs text-[var(--text-secondary)]">Tu balance actual en este mes.</p>
         </motion.div>
 
-        <div className="surface-card card-hover col-span-2 rounded-xl p-5">
+        <div className="surface-card card-hover col-span-2 rounded-xl p-5" aria-label={`Ingresos: ${formatRD(stats.totalIncome)}`}>
           <p className="text-[10px] uppercase tracking-[1.5px] text-[var(--text-muted)]">INGRESOS</p>
           <p className="amount mt-3 text-2xl text-[var(--income)]">{formatRD(stats.totalIncome)}</p>
         </div>
-        <div className="surface-card card-hover col-span-2 rounded-xl p-5">
+        <div className="surface-card card-hover col-span-2 rounded-xl p-5" aria-label={`Gastos: ${formatRD(stats.totalExpense)}`}>
           <p className="text-[10px] uppercase tracking-[1.5px] text-[var(--text-muted)]">GASTOS</p>
           <p className="amount mt-3 text-2xl text-[var(--expense)]">{formatRD(stats.totalExpense)}</p>
         </div>
-        <div className="surface-card card-hover col-span-2 rounded-xl p-5">
+        <div className="surface-card card-hover col-span-2 rounded-xl p-5" aria-label={`Tasa de ahorro: ${savingRate.toFixed(1)}%`}>
           <p className="text-[10px] uppercase tracking-[1.5px] text-[var(--text-muted)]">TASA AHORRO</p>
           <p className="amount mt-3 text-2xl text-[var(--accent)]">{savingRate.toFixed(1)}%</p>
-          <div className="mt-3 h-1 w-full rounded-full bg-white/10">
+          <div className="mt-3 h-1 w-full rounded-full bg-white/10" role="progressbar" aria-valuenow={Math.round(savingRate)} aria-valuemin={0} aria-valuemax={100} aria-label="Barra de tasa de ahorro">
             <div className="h-1 rounded-full bg-[var(--accent)]" style={{ width: `${Math.max(0, Math.min(100, savingRate))}%` }} />
           </div>
         </div>
       </div>
 
-      <div className="surface-card card-hover h-[280px] p-4">
+      <div className="surface-card card-hover h-[280px] p-4" aria-label="Gráfico de flujo de los últimos meses">
         <p className="mb-3 text-sm text-[var(--text-secondary)]">Flujo últimos meses</p>
         <ResponsiveContainer width="100%" height="88%">
           <AreaChart data={stats.monthly}>
@@ -72,8 +83,8 @@ export const Dashboard = ({ finance, payroll }: { finance: UseFinance; payroll: 
                 <stop offset="95%" stopColor="#ff4560" stopOpacity={0} />
               </linearGradient>
             </defs>
-            <Area type="monotone" dataKey="income" stroke="#b5ff4d" strokeWidth={2} fill="url(#incomeGrad)" dot={false} activeDot={{ r: 4, fill: '#b5ff4d' }} />
-            <Area type="monotone" dataKey="expense" stroke="#ff4560" strokeWidth={2} fill="url(#expenseGrad)" dot={false} activeDot={{ r: 4, fill: '#ff4560' }} />
+            <Area type="monotone" dataKey="income" stroke="#b5ff4d" strokeWidth={2} fill="url(#incomeGrad)" dot={false} activeDot={{ r: 4, fill: '#b5ff4d' }} name="Ingresos" />
+            <Area type="monotone" dataKey="expense" stroke="#ff4560" strokeWidth={2} fill="url(#expenseGrad)" dot={false} activeDot={{ r: 4, fill: '#ff4560' }} name="Gastos" />
             <XAxis dataKey="month" tick={{ fill: '#8888aa', fontSize: 11 }} axisLine={false} tickLine={false} tickFormatter={monthName} />
             <Tooltip contentStyle={{ background: '#161625', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 10 }} formatter={(v: number) => formatRD(v)} />
             <CartesianGrid vertical={false} stroke="rgba(255,255,255,0.04)" />
@@ -82,7 +93,7 @@ export const Dashboard = ({ finance, payroll }: { finance: UseFinance; payroll: 
       </div>
 
       <div className="grid grid-cols-2 gap-3">
-        <div className="surface-card card-hover p-4">
+        <div className="surface-card card-hover p-4" aria-label="Distribución de gastos por categoría">
           <p className="mb-2 text-sm text-[var(--text-secondary)]">Distribución gastos</p>
           <div className="relative h-[240px]">
             <ResponsiveContainer width="100%" height="100%">
@@ -95,7 +106,7 @@ export const Dashboard = ({ finance, payroll }: { finance: UseFinance; payroll: 
                 <Tooltip formatter={(value: number) => formatRD(value)} />
               </PieChart>
             </ResponsiveContainer>
-            <div className="pointer-events-none absolute inset-0 grid place-items-center">
+            <div className="pointer-events-none absolute inset-0 grid place-items-center" aria-hidden="true">
               <div className="text-center">
                 <p className="text-xs text-[var(--text-secondary)]">Gastos</p>
                 <p className="amount text-lg text-[var(--expense)]">{formatRD(expenseTotal)}</p>
@@ -104,16 +115,17 @@ export const Dashboard = ({ finance, payroll }: { finance: UseFinance; payroll: 
           </div>
         </div>
 
-        <div className="surface-card card-hover p-4">
+        <div className="surface-card card-hover p-4" aria-label="Actividad reciente">
           <p className="mb-2 text-sm text-[var(--text-secondary)]">Actividad reciente</p>
           <div className="space-y-1">
             {recent.length === 0 ? (
               <div className="grid h-[220px] place-items-center text-center text-[var(--text-secondary)]">
                 <div>
-                  <svg width="120" height="64" viewBox="0 0 120 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg width="120" height="64" viewBox="0 0 120 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M4 48H30L44 36L58 42L78 22L94 30L116 14" stroke="currentColor" strokeWidth="2" />
                   </svg>
                   <p className="mt-2 text-sm">Aún no hay datos</p>
+                  <p className="mt-1 text-xs text-[var(--text-muted)]">Las transacciones recientes aparecerán aquí</p>
                 </div>
               </div>
             ) : (
@@ -137,9 +149,9 @@ export const Dashboard = ({ finance, payroll }: { finance: UseFinance; payroll: 
       </div>
 
       {/* Payroll summary widget */}
-      <div className="surface-card card-hover p-4">
+      <div className="surface-card card-hover p-4" aria-label="Resumen de nóminas">
         <div className="mb-3 flex items-center gap-2">
-          <FileText size={15} className="text-[var(--accent)]" />
+          <FileText size={15} className="text-[var(--accent)]" aria-hidden="true" />
           <p className="text-sm text-[var(--text-secondary)]">Últimas nóminas enviadas</p>
           <span className="ml-auto rounded-full bg-[var(--bg-elevated)] px-2 py-0.5 text-xs text-[var(--text-muted)]">
             {payroll.employees.length} empleado{payroll.employees.length !== 1 ? 's' : ''}
@@ -173,4 +185,3 @@ export const Dashboard = ({ finance, payroll }: { finance: UseFinance; payroll: 
     </section>
   )
 }
-
