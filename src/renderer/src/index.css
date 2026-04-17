@@ -21,7 +21,46 @@
   --border-hover: rgba(255, 255, 255, 0.12);
   --text-primary: #f0f0ff;
   --text-secondary: #8888aa;
-  --text-muted: #44445a;
+  /* Improved contrast for WCAG AA compliance on dark backgrounds (#080810) */
+  --text-muted: #6a6a88;
+}
+
+html[data-a11y-contrast='high'] {
+  --bg-base: #000000;
+  --bg-surface: #0a0a0a;
+  --bg-elevated: #151515;
+  --accent: #f5ff6b;
+  --accent-dim: #d3ea2f;
+  --accent-glow: rgba(245, 255, 107, 0.22);
+  --income: #f5ff6b;
+  --expense: #ff7a8d;
+  --expense-glow: rgba(255, 122, 141, 0.2);
+  --warning: #ffd95a;
+  --border: rgba(255, 255, 255, 0.2);
+  --border-hover: rgba(255, 255, 255, 0.35);
+  --text-primary: #ffffff;
+  --text-secondary: #ececf3;
+  --text-muted: #c3c3d4;
+}
+
+html[data-a11y-text-size='large'] {
+  font-size: 112.5%;
+}
+
+html[data-a11y-reduced-motion='true'] *,
+html[data-a11y-reduced-motion='true'] *::before,
+html[data-a11y-reduced-motion='true'] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+html[data-a11y-contrast='high'] button:focus-visible,
+html[data-a11y-contrast='high'] input:focus,
+html[data-a11y-contrast='high'] select:focus,
+html[data-a11y-contrast='high'] textarea:focus {
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.95), 0 0 0 5px rgba(245, 255, 107, 0.65);
 }
 
 * {
@@ -115,4 +154,17 @@ button:focus-visible {
   border-radius: 50%;
   background: var(--accent);
   animation: pulse-glow 2s infinite;
+}
+
+/* Screen reader only - visually hidden but accessible */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
